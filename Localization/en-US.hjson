@@ -1,0 +1,15 @@
+Mods: {
+	Autofish: {
+		Config: {
+			Header: Autofish Configuration
+			AutoCatchMode: {
+				Label: Auto Catch
+				Tooltip: Enables or disables pulling bobbers automatically.
+			}
+			PullingDelay: {
+				Label: Auto Catch Pulling Delay (Seconds)
+				Tooltip: The delay of pulling bobber up after detecting available fish.
+			}
+		}
+	}
+}

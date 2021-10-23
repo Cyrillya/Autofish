@@ -1,0 +1,15 @@
+﻿Mods: {
+	Autofish: {
+		Config: {
+			Header: 自动钓鱼设置面板
+			AutoCatchMode: {
+				Label: 自动拉鱼线
+				Tooltip: 开启或关闭自动拉鱼线。
+			}
+			PullingDelay: {
+				Label: 拉鱼线延迟（秒）
+				Tooltip: 设置检测到鱼后拉浮标的延迟时间。
+			}
+		}
+	}
+}
