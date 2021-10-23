@@ -29,14 +29,11 @@ namespace Autofish
         public override ConfigScope Mode => ConfigScope.ClientSide;
         [Header("$Mods.Autofish.Config.Header")]
 
-        [Label("$Mods.Autofish.Config.AutoPullBobbers.Label")]
-        [Tooltip("$Mods.Autofish.Config.AutoPullBobbers.Tooltip")]
-        [DefaultValue(true)]
-        public bool AutoPullBobbers;
-
-        [Label("$Mods.Autofish.Config.AutofishEnemies.Label")]
-        [Tooltip("$Mods.Autofish.Config.AutofishEnemies.Tooltip")]
-        [DefaultValue(false)]
-        public bool AutofishEnemies;
+        [DrawTicks]
+        [Label("$Mods.Autofish.Config.AutoCatchMode.Label")]
+        [Tooltip("$Mods.Autofish.Config.AutoCatchMode.Tooltip")]
+        [OptionStrings(new string[] { "[c/DD2222:Disabled]", "[c/22CC22:Only Catch Non-Enemies]", "[c/22CC22:Only Catch Enemies]", "[c/22CC22:Catch All]" })]
+        [DefaultValue("[c/22CC22:Only Catch Non-Enemies]")]
+        public string AutoCatchMode;
     }
 }

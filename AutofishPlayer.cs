@@ -106,7 +106,7 @@ namespace Autofish
             iLCursor.GotoNext(MoveType.After, (Instruction i) => ILPatternMatchingExt.MatchLdloc(i, 24)); // 推入V_24后
             iLCursor.Emit(OpCodes.Ldarg_0); // 推入当前Projectile实例
             iLCursor.EmitDelegate<Func<bool, Projectile, bool>>((returnValue, projectile) => {
-                if (returnValue == true && ModContent.GetInstance<Configuration>().AutoPullBobbers) {
+                if (returnValue == true && CatchNonEnemies) {
                     Main.player[projectile.owner].GetModPlayer<AutofishPlayer>().PullTimer = 5;
                 }
                 return returnValue; // 怎么来的怎么走
@@ -118,12 +118,15 @@ namespace Autofish
             iLCursor.GotoNext(MoveType.After, (Instruction i) => ILPatternMatchingExt.MatchCgt(i));
             iLCursor.GotoNext(MoveType.After, (Instruction i) => ILPatternMatchingExt.MatchLdloc(i, 29));
             iLCursor.Emit(OpCodes.Ldarg_0);
-            iLCursor.EmitDelegate<Func<bool, Projectile, bool>>((v, projectile) => {
-                if (v && ModContent.GetInstance<Configuration>().AutoPullBobbers && ModContent.GetInstance<Configuration>().AutofishEnemies) {
+            iLCursor.EmitDelegate<Func<bool, Projectile, bool>>((returnValue, projectile) => {
+                if (returnValue == true && CatchEnemies) {
                     Main.player[projectile.owner].GetModPlayer<AutofishPlayer>().PullTimer = 5;
                 }
-                return v;
+                return returnValue;
             });
         }
+
+        private bool CatchEnemies => ModContent.GetInstance<Configuration>().AutoCatchMode == "[c/22CC22:Catch All]" || ModContent.GetInstance<Configuration>().AutoCatchMode == "[c/22CC22:Only Catch Enemies]";
+        private bool CatchNonEnemies => ModContent.GetInstance<Configuration>().AutoCatchMode == "[c/22CC22:Catch All]" || ModContent.GetInstance<Configuration>().AutoCatchMode == "[c/22CC22:Only Catch Non-Enemies]";
     }
 }
