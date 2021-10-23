@@ -1,11 +1,12 @@
 ﻿This mod can help you fish automatically. Which means auto pull and cast bobbers while holding a fishing pole.
-This mod can help avoiding catching enemies.
 Note that you need to bind a key to toggle auto cast bobbers.
+The 1.4 version of this mod can help avoiding catching enemies. Install it in tModLoader Steam Workshop.
 
 You can see this mod's source code here: https://github.com/Crapsky233/Autofish
 
 Configuration:
-"Auto Catch": Enables or disables pulling bobbers automatically. You can decide whether to catch enemies, non-enemies, or both.
+"Auto Catch": Enables or disables pulling bobbers automatically.
+"Pulling Delay": Set the delay of pulling bobber up after detecting available fish.
 
 Hotkeys:
 "Toggle Auto Cast Fishing Pole": Toggle auto casting bobbers.
@@ -16,13 +17,14 @@ Below are Chinese translated description.
 以上是英文版简介
 
 这个模组可以让你自动钓鱼。当拿着钓鱼竿时自动抛/收鱼线。
-可以避免在血月时钓上怪物。
 注意你需要绑定一个按键才可以开关自动抛鱼线。
+此Mod的1.4版本可以避免在血月时钓上怪物。可在tModLoader的Steam创意工坊里下载。
 
 你可以在此处找到此Mod的源码：https://github.com/Crapsky233/Autofish
 
 设置选项:
-"Auto Catch": 开启或关闭自动拉鱼线。你可以决定是否捕捉敌怪、捕捉非敌怪或捕捉全部。
+"Auto Catch": 开启或关闭自动拉鱼线。
+"Pulling Delay": 设置检测到鱼后拉浮标的延迟时间。
 
 快捷键：
 “Toggle Auto Cast Fishing Pole”：开关自动抛鱼线
