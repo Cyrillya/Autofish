@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "J3EyhMSnxEPvFihN4jiND5+37DJ8wXrF7/rwa3kObChXfKjv6B3Bg2i1CrinK2wfHOOPsbwrkvCqBL4fze3JRw==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Administrator\\Documents\\My Games\\Terraria\\ModLoader\\Beta\\Mod Sources\\Autofish\\Autofish.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Administrator\\.nuget\\packages\\tmodloader.codeassist\\0.1.3\\tmodloader.codeassist.0.1.3.nupkg.sha512"
+  ],
+  "logs": []
+}

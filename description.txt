@@ -1,0 +1,24 @@
+﻿This mod can help you fish automatically. Which means auto pull and cast bobbers while holding a fishing pole.
+Fishing enemies up can be avoid by using this mod.
+Note that you need to bind a key to toggle auto cast bobbers.
+
+Configuration:
+"Auto Pull Bobbers Toggle": Enables or disables pulling bobbers automatically.
+"Spawn Enemies Toggle": If disabled, bobbers will not be automatically pulled if it will spawn a enemy. Works only if Auto Pull Bobbers is enabled.
+Hotkeys:
+"Toggle Auto Cast Fishing Pole": Toggle auto casting bobbers.
+"Lock Casting Target To Cursor": Lock the casting target to cursor. Bobbers will be casted to a locked position wherever the cursor at. Only useful when activating "Auto Cast Fishing Pole".
+
+---Below are Chinese translated description---
+---以上是英文版简介---
+
+这个模组可以让你自动钓鱼。当拿着钓鱼竿时自动抛/收鱼线。
+可以避免在血月时钓上怪物。
+注意你需要绑定一个按键才可以开关自动抛鱼线。
+
+设置选项:
+"Auto Pull Bobbers Toggle": 开启或关闭自动拉鱼线。
+"Spawn Enemies Toggle": 如果关闭，则当会生成怪物时不会自动拉动鱼线。仅在自动拉鱼线(Auto Pull Bobbers)开启时有用。
+快捷键：
+“Toggle Auto Cast Fishing Pole”：开关自动抛鱼线
+“Lock Casting Target To Cursor”：将鱼钩投射目标锁定到光标，开启后浮标将被投射到锁定位置。仅在激活“自动投射钓鱼竿”时有用。

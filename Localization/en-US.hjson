@@ -1,0 +1,19 @@
+Mods: {
+	Autofish: {
+		Config: {
+			Header: Autofish Configuration
+			AutoPullBobbers: {
+				Label: Auto Pull Bobbers Toggle
+				Tooltip: Enables or disables pulling bobbers automatically.
+			}
+			AutofishEnemies: {
+				Label: Spawn Enemies Toggle
+				Tooltip: If disabled, bobbers will not be automatically pulled if it will spawn a enemy. Works only if Auto Pull Bobbers is enabled.
+			}
+		}
+		AutoCastBobbers: {
+			On: Auto cast bobbers are now activated.
+			Off: Auto cast bobbers are now deactivated.
+		}
+	}
+}

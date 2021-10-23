@@ -1,0 +1,19 @@
+﻿Mods: {
+	Autofish: {
+		Config: {
+			Header: 自动钓鱼设置面板
+			AutoPullBobbers: {
+				Label: 自动拉鱼线
+				Tooltip: 开启或关闭自动拉鱼线。
+			}
+			AutofishEnemies: {
+				Label: 生成怪物
+				Tooltip: 如果关闭，则当会生成怪物时不会自动拉动鱼线。仅在自动拉鱼线开启时有用。
+			}
+		}
+		AutoCastBobbers: {
+			On: 自动抛鱼线已启用。
+			Off: 自动抛鱼线已禁用。
+		}
+	}
+}
