@@ -115,11 +115,11 @@ namespace Autofish
                 return returnValue; // 怎么来的怎么走
             });
 
-            // 钓出怪物的代码，原理和上方都一样，只不过是V_29
+            // 钓出怪物的代码，原理和上方都一样，只不过是V_28
             iLCursor = new ILCursor(il);
             iLCursor.GotoNext(MoveType.After, (Instruction i) => ILPatternMatchingExt.MatchLdcI4(i, 0));
             iLCursor.GotoNext(MoveType.After, (Instruction i) => ILPatternMatchingExt.MatchCgt(i));
-            iLCursor.GotoNext(MoveType.After, (Instruction i) => ILPatternMatchingExt.MatchLdloc(i, 29));
+            iLCursor.GotoNext(MoveType.After, (Instruction i) => ILPatternMatchingExt.MatchLdloc(i, 28));
             iLCursor.Emit(OpCodes.Ldarg_0);
             iLCursor.EmitDelegate<Func<bool, Projectile, bool>>((returnValue, projectile) => {
                 var player = Main.player[projectile.owner].GetModPlayer<AutofishPlayer>();
