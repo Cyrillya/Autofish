@@ -3,6 +3,7 @@ using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
 using Terraria;
+using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ModLoader;
 
@@ -101,32 +102,28 @@ namespace Autofish
         // 用PlayerLoader的话可能会存在因Mod加载顺序不同而出现冲突的Bug
         private void Projectile_FishingCheck(ILContext il)
         {
-            // 流程：定位到Roll完渔获后 -> 检查有没有成功(bool V_24 = fisher.rolledItemDrop > 0) -> 决定是否拉钩
-            ILCursor iLCursor = new ILCursor(il);
-            iLCursor.GotoNext(MoveType.After, (Instruction i) => ILPatternMatchingExt.MatchLdcI4(i, 0));
-            iLCursor.GotoNext(MoveType.After, (Instruction i) => ILPatternMatchingExt.MatchCgt(i));
-            iLCursor.GotoNext(MoveType.After, (Instruction i) => ILPatternMatchingExt.MatchLdloc(i, 24)); // 推入V_24后
-            iLCursor.Emit(OpCodes.Ldarg_0); // 推入当前Projectile实例
-            iLCursor.EmitDelegate<Func<bool, Projectile, bool>>((returnValue, projectile) => {
+            // 流程：检查有没有成功(fisher.rolledItemDrop > 0) -> 决定是否拉钩
+            ILCursor c = new ILCursor(il);
+            c.GotoNext(MoveType.After, i => i.MatchLdfld(typeof(FishingAttempt), nameof(FishingAttempt.rolledItemDrop)));
+            c.Emit(OpCodes.Ldarg_0); // 推入当前Projectile实例
+            c.EmitDelegate<Func<int, Projectile, int>>((returnValue, projectile) => {
                 var player = Main.player[projectile.owner].GetModPlayer<AutofishPlayer>();
-                if (returnValue == true && CatchNonEnemies && player.PullTimer == 0) {
+                if (returnValue > 0 && CatchNonEnemies && player.PullTimer == 0) {
                     player.PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
                 }
                 return returnValue; // 怎么来的怎么走
             });
 
-            // 钓出怪物的代码，原理和上方都一样，只不过是V_28
-            iLCursor = new ILCursor(il);
-            iLCursor.GotoNext(MoveType.After, (Instruction i) => ILPatternMatchingExt.MatchLdcI4(i, 0));
-            iLCursor.GotoNext(MoveType.After, (Instruction i) => ILPatternMatchingExt.MatchCgt(i));
-            iLCursor.GotoNext(MoveType.After, (Instruction i) => ILPatternMatchingExt.MatchLdloc(i, 28));
-            iLCursor.Emit(OpCodes.Ldarg_0);
-            iLCursor.EmitDelegate<Func<bool, Projectile, bool>>((returnValue, projectile) => {
+            // 钓出怪物的代码，原理和上方都一样
+            c = new ILCursor(il);
+            c.GotoNext(MoveType.After, i => i.MatchLdfld(typeof(FishingAttempt), nameof(FishingAttempt.rolledEnemySpawn)));
+            c.Emit(OpCodes.Ldarg_0); // 推入当前Projectile实例
+            c.EmitDelegate<Func<int, Projectile, int>>((returnValue, projectile) => {
                 var player = Main.player[projectile.owner].GetModPlayer<AutofishPlayer>();
-                if (returnValue == true && CatchEnemies && player.PullTimer == 0) {
+                if (returnValue > 0 && CatchEnemies && player.PullTimer == 0) {
                     player.PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
                 }
-                return returnValue;
+                return returnValue; // 怎么来的怎么走
             });
         }
 

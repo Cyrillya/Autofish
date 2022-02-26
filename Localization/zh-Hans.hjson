@@ -1,7 +1,7 @@
 ﻿Mods: {
 	Autofish: {
 		Config: {
-			Header: 自动钓鱼设置面板
+			Label: 自动钓鱼配置面板
 			AutoCatchMode: {
 				Label: 自动拉鱼线
 				Tooltip: 开启或关闭自动拉鱼线。

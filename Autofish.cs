@@ -24,10 +24,10 @@ namespace Autofish
         }
     }
 
+    [Label("$Mods.Autofish.Config.Label")]
     public class Configuration : ModConfig
     {
         public override ConfigScope Mode => ConfigScope.ClientSide;
-        [Header("$Mods.Autofish.Config.Header")]
 
         [DrawTicks]
         [Label("$Mods.Autofish.Config.AutoCatchMode.Label")]

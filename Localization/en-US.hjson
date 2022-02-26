@@ -1,7 +1,7 @@
 Mods: {
 	Autofish: {
 		Config: {
-			Header: Autofish Configuration
+			Label: Autofish Configuration
 			AutoCatchMode: {
 				Label: Auto Catch
 				Tooltip: Enables or disables pulling bobbers automatically.
