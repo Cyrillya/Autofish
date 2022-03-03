@@ -17,8 +17,7 @@ namespace Autofish
         internal bool Autocast = false;
         internal int AutocastDelay = 0;
 
-        public override void ProcessTriggers(TriggersSet triggersSet)
-        {
+        public override void ProcessTriggers(TriggersSet triggersSet) {
             if (Autofish.AutocastKeybind.JustPressed) {
                 Autocast = !Autocast;
                 if (Autocast) {
@@ -38,8 +37,7 @@ namespace Autofish
             }
         }
 
-        public override void PreUpdate()
-        {
+        public override void PreUpdate() {
             if (PullTimer > 0) {
                 PullTimer--;
                 if (PullTimer == 0) {
@@ -61,7 +59,7 @@ namespace Autofish
                 }
 
                 var mouseX = Main.mouseX; var mouseY = Main.mouseY;
-                if (Lockcast) { 
+                if (Lockcast) {
                     Main.mouseX = CastPosition.X - (int)Main.screenPosition.X;
                     Main.mouseY = CastPosition.Y - (int)Main.screenPosition.Y;
                 }
@@ -79,32 +77,24 @@ namespace Autofish
             }
         }
 
-        public override void OnEnterWorld(Player player)
-        {
+        public override void OnEnterWorld(Player player) {
             Lockcast = false;
             CastPosition = default;
             Autocast = false;
             base.OnEnterWorld(player);
         }
 
-        public override void Load()
-        {
+        public override void Load() {
             IL.Terraria.Projectile.FishingCheck += Projectile_FishingCheck;
             base.Load();
         }
 
-        public override void Unload()
-        {
-            IL.Terraria.Projectile.FishingCheck -= Projectile_FishingCheck;
-            base.Unload();
-        }
-
         // 用PlayerLoader的话可能会存在因Mod加载顺序不同而出现冲突的Bug
-        private void Projectile_FishingCheck(ILContext il)
-        {
+        private void Projectile_FishingCheck(ILContext il) {
             // 流程：检查有没有成功(fisher.rolledItemDrop > 0) -> 决定是否拉钩
             ILCursor c = new ILCursor(il);
-            c.GotoNext(MoveType.After, i => i.MatchLdfld(typeof(FishingAttempt), nameof(FishingAttempt.rolledItemDrop)));
+            if (!c.TryGotoNext(MoveType.After, i => i.MatchLdfld(typeof(FishingAttempt), nameof(FishingAttempt.rolledItemDrop))))
+                throw new Exception("Hook location not found, if (fisher.rolledItemDrop > 0)");
             c.Emit(OpCodes.Ldarg_0); // 推入当前Projectile实例
             c.EmitDelegate<Func<int, Projectile, int>>((returnValue, projectile) => {
                 var player = Main.player[projectile.owner].GetModPlayer<AutofishPlayer>();
@@ -116,7 +106,8 @@ namespace Autofish
 
             // 钓出怪物的代码，原理和上方都一样
             c = new ILCursor(il);
-            c.GotoNext(MoveType.After, i => i.MatchLdfld(typeof(FishingAttempt), nameof(FishingAttempt.rolledEnemySpawn)));
+            if (!c.TryGotoNext(MoveType.After, i => i.MatchLdfld(typeof(FishingAttempt), nameof(FishingAttempt.rolledEnemySpawn))))
+                throw new Exception("Hook location not found, if (fisher.rolledEnemySpawn > 0)");
             c.Emit(OpCodes.Ldarg_0); // 推入当前Projectile实例
             c.EmitDelegate<Func<int, Projectile, int>>((returnValue, projectile) => {
                 var player = Main.player[projectile.owner].GetModPlayer<AutofishPlayer>();
