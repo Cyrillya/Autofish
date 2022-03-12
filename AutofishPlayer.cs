@@ -5,6 +5,7 @@ using System;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Autofish
@@ -98,8 +99,19 @@ namespace Autofish
             c.Emit(OpCodes.Ldarg_0); // 推入当前Projectile实例
             c.EmitDelegate<Func<int, Projectile, int>>((returnValue, projectile) => {
                 var player = Main.player[projectile.owner].GetModPlayer<AutofishPlayer>();
-                if (returnValue > 0 && CatchNonEnemies && player.PullTimer == 0) {
-                    player.PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
+                if (player.PullTimer == 0 && returnValue > 0) {
+                    var item = new Item();
+                    item.SetDefaults(returnValue);
+                    Main.NewText($"[i:{returnValue}]");
+
+                    if ((ItemID.Sets.IsFishingCrate[returnValue] && ModContent.GetInstance<Configuration>().CatchCrates)
+                        || (item.accessory && ModContent.GetInstance<Configuration>().CatchAccessories)
+                        || (item.damage > 0 && ModContent.GetInstance<Configuration>().CatchTools)
+                        || (item.questItem && ModContent.GetInstance<Configuration>().CatchQuestFishes))
+                        player.PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
+
+                    if (!ItemID.Sets.IsFishingCrate[returnValue] && !item.accessory && item.damage <= 0 && !item.questItem && ModContent.GetInstance<Configuration>().CatchNormalCatches)
+                        player.PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
                 }
                 return returnValue; // 怎么来的怎么走
             });
@@ -111,14 +123,11 @@ namespace Autofish
             c.Emit(OpCodes.Ldarg_0); // 推入当前Projectile实例
             c.EmitDelegate<Func<int, Projectile, int>>((returnValue, projectile) => {
                 var player = Main.player[projectile.owner].GetModPlayer<AutofishPlayer>();
-                if (returnValue > 0 && CatchEnemies && player.PullTimer == 0) {
+                if (returnValue > 0 && ModContent.GetInstance<Configuration>().CatchEnemies && player.PullTimer == 0) {
                     player.PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
                 }
                 return returnValue; // 怎么来的怎么走
             });
         }
-
-        private bool CatchEnemies => ModContent.GetInstance<Configuration>().AutoCatchMode == "[c/22CC22:Catch All]" || ModContent.GetInstance<Configuration>().AutoCatchMode == "[c/22CC22:Only Catch Enemies]";
-        private bool CatchNonEnemies => ModContent.GetInstance<Configuration>().AutoCatchMode == "[c/22CC22:Catch All]" || ModContent.GetInstance<Configuration>().AutoCatchMode == "[c/22CC22:Only Catch Non-Enemies]";
     }
 }

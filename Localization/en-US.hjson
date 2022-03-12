@@ -2,14 +2,16 @@ Mods: {
 	Autofish: {
 		Config: {
 			Label: Autofish Configuration
-			AutoCatchMode: {
-				Label: Auto Catch
-				Tooltip: Enables or disables pulling bobbers automatically.
-			}
 			PullingDelay: {
 				Label: Auto Catch Pulling Delay (Seconds)
 				Tooltip: The delay of pulling bobber up after detecting available fish.
 			}
+			CatchCrates: "[i:2356] Auto Catch Crates"
+			CatchAccessories: "[i:2423] Auto Catch Accessories"
+			CatchTools: "[i:2341] Auto Catch Tools and Weapons"
+			CatchQuestFishes: "[i:2487] Auto Catch Quest Fishes"
+			CatchNormalCatches: "[i:2290] Auto Catch Normal Catches"
+			CatchEnemies: "[i:4271] Auto Catch All Bloodmoon Enemies"
 		}
 	}
 }

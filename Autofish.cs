@@ -29,18 +29,35 @@ namespace Autofish
     {
         public override ConfigScope Mode => ConfigScope.ClientSide;
 
-        [DrawTicks]
-        [Label("$Mods.Autofish.Config.AutoCatchMode.Label")]
-        [Tooltip("$Mods.Autofish.Config.AutoCatchMode.Tooltip")]
-        [OptionStrings(new string[] { "[c/DD2222:Disabled]", "[c/22CC22:Only Catch Non-Enemies]", "[c/22CC22:Only Catch Enemies]", "[c/22CC22:Catch All]" })]
-        [DefaultValue("[c/22CC22:Only Catch Non-Enemies]")]
-        public string AutoCatchMode;
-
         [Label("$Mods.Autofish.Config.PullingDelay.Label")]
         [Tooltip("$Mods.Autofish.Config.PullingDelay.Tooltip")]
         [Range(0f, 1.5f)]
         [Increment(.1f)]
-        [DefaultValue(.1f)]
+        [DefaultValue(.5f)]
         public float PullingDelay;
+
+        [Label("$Mods.Autofish.Config.CatchCrates")]
+        [DefaultValue(true)]
+        public bool CatchCrates;
+
+        [Label("$Mods.Autofish.Config.CatchAccessories")]
+        [DefaultValue(true)]
+        public bool CatchAccessories;
+
+        [Label("$Mods.Autofish.Config.CatchTools")]
+        [DefaultValue(true)]
+        public bool CatchTools;
+
+        [Label("$Mods.Autofish.Config.CatchQuestFishes")]
+        [DefaultValue(true)]
+        public bool CatchQuestFishes;
+
+        [Label("$Mods.Autofish.Config.CatchNormalCatches")]
+        [DefaultValue(true)]
+        public bool CatchNormalCatches;
+
+        [Label("$Mods.Autofish.Config.CatchEnemies")]
+        [DefaultValue(true)]
+        public bool CatchEnemies;
     }
 }
