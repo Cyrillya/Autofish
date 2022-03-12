@@ -5,8 +5,13 @@ Note that you need to bind a key to toggle auto cast bobbers.
 You can see this mod's source code here: https://github.com/Crapsky233/Autofish
 
 Configuration:
-"Auto Catch": Enables or disables pulling bobbers automatically. You can decide whether to catch enemies, non-enemies, or both.
 "Pulling Delay": The delay of pulling bobber up after detecting available fish.
+"[i:2356] Auto Catch Crates"
+"[i:2423] Auto Catch Accessories"
+"[i:2341] Auto Catch Tools and Weapons"
+"[i:2487] Auto Catch Quest Fishes"
+"[i:2290] Auto Catch Normal Catches"
+"[i:4271] Auto Catch All Bloodmoon Enemies"
 
 Hotkeys:
 "Toggle Auto Cast Fishing Pole": Toggle auto casting bobbers.
@@ -23,8 +28,13 @@ Below are Chinese translated description.
 你可以在此处找到此Mod的源码：https://github.com/Crapsky233/Autofish
 
 设置选项:
-"Auto Catch": 开启或关闭自动拉鱼线。你可以决定是否捕捉敌怪、捕捉非敌怪或捕捉全部。
-"Pulling Delay": 设置检测到鱼后拉浮标的延迟时间。
+"拉鱼线延迟（秒）": 设置检测到鱼后拉浮标的延迟时间。
+"[i:2356] 自动钓宝匣"
+"[i:2423] 自动钓饰品"
+"[i:2341] 自动钓工具和武器"
+"[i:2487] 自动钓任务鱼"
+"[i:2290] 自动钓一般渔获"
+"[i:4271] 自动钓血月怪物"
 
 快捷键：
 “Toggle Auto Cast Fishing Pole”：开关自动抛鱼线

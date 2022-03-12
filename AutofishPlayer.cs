@@ -102,7 +102,6 @@ namespace Autofish
                 if (player.PullTimer == 0 && returnValue > 0) {
                     var item = new Item();
                     item.SetDefaults(returnValue);
-                    Main.NewText($"[i:{returnValue}]");
 
                     if ((ItemID.Sets.IsFishingCrate[returnValue] && ModContent.GetInstance<Configuration>().CatchCrates)
                         || (item.accessory && ModContent.GetInstance<Configuration>().CatchAccessories)
