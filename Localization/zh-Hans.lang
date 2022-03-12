@@ -1,4 +1,5 @@
-﻿Configs.Title.Configuration=自动钓鱼配置面板
+﻿# Chinese
+Configs.Title=自动钓鱼配置面板
 Configs.PullingDelayLabel=拉鱼线延迟（秒）
 Configs.PullingDelayTooltip=设置检测到鱼后拉浮标的延迟时间
 Configs.CatchCrates=[i:2356] 自动钓宝匣

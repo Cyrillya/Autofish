@@ -1,4 +1,5 @@
-﻿Configs.Title.Configuration=Autofish Configuration
+﻿# English
+Configs.Title=Autofish Configuration
 Configs.PullingDelayLabel=Auto Catch Pulling Delay (Seconds)
 Configs.PullingDelayTooltip=The delay of pulling bobber up after detecting available fish.
 Configs.CatchCrates=[i:2356] Auto Catch Crates

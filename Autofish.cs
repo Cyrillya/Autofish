@@ -71,7 +71,7 @@ namespace Autofish
         }
     }
 
-    [Label("$Mods.Autofish.Configs.Title.Configuration")]
+    [Label("$Mods.Autofish.Configs.Title")]
     public class Configuration : ModConfig
     {
         public override ConfigScope Mode => ConfigScope.ClientSide;
