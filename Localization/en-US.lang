@@ -1,3 +1,8 @@
-﻿Common.ConfigHeader:Autofish Configuration
-Common.ConfigLabel:Auto Catch Toggle
-Common.ConfigTooltip:Enables or disables pulling bobbers automatically.
+﻿Configs.Title.Configuration=Autofish Configuration
+Configs.PullingDelayLabel=Auto Catch Pulling Delay (Seconds)
+Configs.PullingDelayTooltip=The delay of pulling bobber up after detecting available fish.
+Configs.CatchCrates=[i:2356] Auto Catch Crates
+Configs.CatchAccessories=[i:2423] Auto Catch Accessories
+Configs.CatchTools=[i:2341] Auto Catch Tools and Weapons
+Configs.CatchQuestFishes=[i:2487] Auto Catch Quest Fishes
+Configs.CatchNormalCatches=[i:2290] Auto Catch Normal Catches

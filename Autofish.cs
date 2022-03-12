@@ -3,6 +3,7 @@ using MonoMod.Cil;
 using System;
 using System.ComponentModel;
 using Terraria;
+using Terraria.ID;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
 
@@ -10,6 +11,7 @@ namespace Autofish
 {
     public class Autofish : Mod
     {
+        public static bool[] IsFishingCrate = ItemID.Sets.Factory.CreateBoolSet(2334, 2335, 2336, 3203, 3204, 3205, 3206, 3207, 3208);
         public static ModHotKey AutocastKeybind;
         public static ModHotKey LockcastDirectionKeybind;
 
@@ -50,28 +52,55 @@ namespace Autofish
             iLCursor.GotoNext(MoveType.After, (Instruction i) => ILPatternMatchingExt.MatchLdloc(i, 13));
             iLCursor.Emit(OpCodes.Ldarg_0); // 推入当前Projectile实例
             iLCursor.EmitDelegate<Func<int, Projectile, int>>((returnValue, projectile) => {
-                if (returnValue > 0 && ModContent.GetInstance<Configuration>().AutoCatchToggle) {
-                    Main.player[projectile.owner].GetModPlayer<AutofishPlayer>().PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
+                var player = Main.player[projectile.owner].GetModPlayer<AutofishPlayer>();
+                if (player.PullTimer == 0 && returnValue > 0) {
+                    var item = new Item();
+                    item.SetDefaults(returnValue);
+
+                    if ((IsFishingCrate[returnValue] && ModContent.GetInstance<Configuration>().CatchCrates)
+                        || (item.accessory && ModContent.GetInstance<Configuration>().CatchAccessories)
+                        || (item.damage > 0 && ModContent.GetInstance<Configuration>().CatchTools)
+                        || (item.questItem && ModContent.GetInstance<Configuration>().CatchQuestFishes))
+                        player.PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
+
+                    if (!IsFishingCrate[returnValue] && !item.accessory && item.damage <= 0 && !item.questItem && ModContent.GetInstance<Configuration>().CatchNormalCatches)
+                        player.PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
                 }
                 return returnValue; // 怎么来的怎么走
             });
         }
     }
 
+    [Label("$Mods.Autofish.Configs.Title.Configuration")]
     public class Configuration : ModConfig
     {
         public override ConfigScope Mode => ConfigScope.ClientSide;
-        [Header("Autofish Configuration")]
 
-        [Label("Auto Catch Toggle")]
-        [Tooltip("Enables or disables pulling bobbers automatically.")]
-        public bool AutoCatchToggle;
-
-        [Label("Auto Catch Pulling Delay (Seconds)")]
-        [Tooltip("Set the delay of pulling bobber up after detecting available fish.")]
+        [Label("$Mods.Autofish.Configs.PullingDelayLabel")]
+        [Tooltip("$Mods.Autofish.Configs.PullingDelayTooltip")]
         [Range(0f, 1.5f)]
         [Increment(.1f)]
-        [DefaultValue(.1f)]
+        [DefaultValue(.5f)]
         public float PullingDelay;
+
+        [Label("$Mods.Autofish.Configs.CatchCrates")]
+        [DefaultValue(true)]
+        public bool CatchCrates;
+
+        [Label("$Mods.Autofish.Configs.CatchAccessories")]
+        [DefaultValue(true)]
+        public bool CatchAccessories;
+
+        [Label("$Mods.Autofish.Configs.CatchTools")]
+        [DefaultValue(true)]
+        public bool CatchTools;
+
+        [Label("$Mods.Autofish.Configs.CatchQuestFishes")]
+        [DefaultValue(true)]
+        public bool CatchQuestFishes;
+
+        [Label("$Mods.Autofish.Configs.CatchNormalCatches")]
+        [DefaultValue(true)]
+        public bool CatchNormalCatches;
     }
 }
