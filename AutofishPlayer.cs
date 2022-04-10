@@ -36,9 +36,6 @@ namespace Autofish
         }
 
         public override void CatchFish(Item fishingRod, Item bait, int power, int liquidType, int poolSize, int worldLayer, int questFish, ref int caughtType, ref bool junk) {
-            if (caughtType > 0) {
-                PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
-            }
             if (PullTimer == 0 && caughtType > 0) {
                 if ((IsFishingCrate[caughtType] && ModContent.GetInstance<Configuration>().CatchCrates)
                     || (bait.accessory && ModContent.GetInstance<Configuration>().CatchAccessories)
