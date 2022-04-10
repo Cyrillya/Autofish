@@ -9,6 +9,7 @@ namespace Autofish
     public class AutofishPlayer : ModPlayer
     {
         public static bool[] IsFishingCrate = ItemID.Sets.Factory.CreateBoolSet(2334, 2335, 2336, 3203, 3204, 3205, 3206, 3207, 3208);
+        internal static Configuration Configuration;
         internal bool Lockcast = false;
         internal Point CastPosition;
         internal int PullTimer = 0;
@@ -37,14 +38,29 @@ namespace Autofish
 
         public override void CatchFish(Item fishingRod, Item bait, int power, int liquidType, int poolSize, int worldLayer, int questFish, ref int caughtType, ref bool junk) {
             if (PullTimer == 0 && caughtType > 0) {
-                if ((IsFishingCrate[caughtType] && ModContent.GetInstance<Configuration>().CatchCrates)
-                    || (bait.accessory && ModContent.GetInstance<Configuration>().CatchAccessories)
-                    || (bait.damage > 0 && ModContent.GetInstance<Configuration>().CatchTools)
-                    || (bait.questItem && ModContent.GetInstance<Configuration>().CatchQuestFishes))
-                    PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
+                int fishType = 0; // 0 for normal
+                if (IsFishingCrate[caughtType]) fishType = 1; // 1 for vanilla crates
+                if (bait.accessory) fishType = 2; // 2 for accessories
+                if (bait.damage > 0) fishType = 3; // 3 for weapons and tools
+                if (bait.questItem) fishType = 4; // 4 for quests
 
-                if (!IsFishingCrate[caughtType] && !bait.accessory && bait.damage <= 0 && !bait.questItem && ModContent.GetInstance<Configuration>().CatchNormalCatches)
-                    PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
+                switch (fishType) {
+                    case 1:
+                        if (Configuration.CatchCrates) PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
+                        break;
+                    case 2:
+                        if (Configuration.CatchAccessories) PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
+                        break;
+                    case 3:
+                        if (Configuration.CatchTools) PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
+                        break;
+                    case 4:
+                        if (Configuration.CatchQuestFishes) PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
+                        break;
+                    default:
+                        if (Configuration.CatchNormalCatches) PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
+                        break;
+                }
             }
         }
 

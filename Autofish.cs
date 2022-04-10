@@ -30,6 +30,8 @@ namespace Autofish
     {
         public override ConfigScope Mode => ConfigScope.ClientSide;
 
+        public override void OnLoaded() => AutofishPlayer.Configuration = this;
+
         [Label("$Mods.Autofish.Configs.PullingDelayLabel")]
         [Tooltip("$Mods.Autofish.Configs.PullingDelayTooltip")]
         [Range(0f, 1.5f)]
