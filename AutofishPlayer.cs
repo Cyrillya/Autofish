@@ -1,20 +1,21 @@
 ﻿using Microsoft.Xna.Framework;
 using Terraria;
 using Terraria.GameInput;
+using Terraria.ID;
 using Terraria.ModLoader;
 
 namespace Autofish
 {
     public class AutofishPlayer : ModPlayer
     {
+        public static bool[] IsFishingCrate = ItemID.Sets.Factory.CreateBoolSet(2334, 2335, 2336, 3203, 3204, 3205, 3206, 3207, 3208);
         internal bool Lockcast = false;
         internal Point CastPosition;
         internal int PullTimer = 0;
         internal bool Autocast = false;
         internal int AutocastDelay = 0;
 
-        public override void ProcessTriggers(TriggersSet triggersSet)
-        {
+        public override void ProcessTriggers(TriggersSet triggersSet) {
             if (Autofish.AutocastKeybind.JustPressed) {
                 Autocast = !Autocast;
                 if (Autocast) {
@@ -34,8 +35,23 @@ namespace Autofish
             }
         }
 
-        public override void PreUpdate()
-        {
+        public override void CatchFish(Item fishingRod, Item bait, int power, int liquidType, int poolSize, int worldLayer, int questFish, ref int caughtType, ref bool junk) {
+            if (caughtType > 0) {
+                PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
+            }
+            if (PullTimer == 0 && caughtType > 0) {
+                if ((IsFishingCrate[caughtType] && ModContent.GetInstance<Configuration>().CatchCrates)
+                    || (bait.accessory && ModContent.GetInstance<Configuration>().CatchAccessories)
+                    || (bait.damage > 0 && ModContent.GetInstance<Configuration>().CatchTools)
+                    || (bait.questItem && ModContent.GetInstance<Configuration>().CatchQuestFishes))
+                    PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
+
+                if (!IsFishingCrate[caughtType] && !bait.accessory && bait.damage <= 0 && !bait.questItem && ModContent.GetInstance<Configuration>().CatchNormalCatches)
+                    PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
+            }
+        }
+
+        public override void PreUpdate() {
             if (PullTimer > 0) {
                 PullTimer--;
                 if (PullTimer == 0) {
@@ -56,7 +72,7 @@ namespace Autofish
                     }
                 }
 
-                if (Lockcast) { 
+                if (Lockcast) {
                     Main.mouseX = CastPosition.X - (int)Main.screenPosition.X;
                     Main.mouseY = CastPosition.Y - (int)Main.screenPosition.Y;
                 }
@@ -68,8 +84,7 @@ namespace Autofish
             }
         }
 
-        public override void OnEnterWorld(Player player)
-        {
+        public override void OnEnterWorld(Player player) {
             Lockcast = false;
             CastPosition = default;
             Autocast = false;
