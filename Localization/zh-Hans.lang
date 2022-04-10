@@ -7,3 +7,4 @@ Configs.CatchAccessories=[i:2423] 自动钓饰品
 Configs.CatchTools=[i:2341] 自动钓工具和武器
 Configs.CatchQuestFishes=[i:2487] 自动钓任务鱼
 Configs.CatchNormalCatches=[i:2290] 自动钓一般渔获
+Configs.CatchJunks=[i:2337] 自动钓垃圾（关掉就完事了）

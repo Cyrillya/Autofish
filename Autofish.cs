@@ -58,5 +58,9 @@ namespace Autofish
         [Label("$Mods.Autofish.Configs.CatchNormalCatches")]
         [DefaultValue(true)]
         public bool CatchNormalCatches;
+
+        [Label("$Mods.Autofish.Configs.CatchJunks")]
+        [DefaultValue(false)]
+        public bool CatchJunks;
     }
 }

@@ -7,3 +7,4 @@ Configs.CatchAccessories=[i:2423] Auto Catch Accessories
 Configs.CatchTools=[i:2341] Auto Catch Tools and Weapons
 Configs.CatchQuestFishes=[i:2487] Auto Catch Quest Fishes
 Configs.CatchNormalCatches=[i:2290] Auto Catch Normal Catches
+Configs.CatchJunks=[i:2337] Auto Catch Junks (Just leave it off)
