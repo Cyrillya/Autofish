@@ -8,8 +8,6 @@ namespace Autofish
 {
     public class AutofishPlayer : ModPlayer
     {
-        public static bool[] IsFishingCrate = ItemID.Sets.Factory.CreateBoolSet(2334, 2335, 2336, 3203, 3204, 3205, 3206, 3207, 3208);
-        internal static Configuration Configuration;
         internal bool Lockcast = false;
         internal Point CastPosition;
         internal int PullTimer = 0;
@@ -33,41 +31,6 @@ namespace Autofish
                     return;
                 }
                 Main.NewText("Casting target are now [c/BB2222:unlocked].");
-            }
-        }
-
-        public override void CatchFish(Item fishingRod, Item bait, int power, int liquidType, int poolSize, int worldLayer, int questFish, ref int caughtType, ref bool junk) {
-            if (PullTimer == 0 && caughtType > 0) {
-                var item = new Item();
-                item.SetDefaults(caughtType);
-
-                int fishType = 0; // 0 for normal
-                if (IsFishingCrate[caughtType]) fishType = 1; // 1 for vanilla crates
-                if (item.accessory) fishType = 2; // 2 for accessories
-                if (item.damage > 0) fishType = 3; // 3 for weapons and tools
-                if (item.questItem) fishType = 4; // 4 for quests
-                if (junk) fishType = 5; // 5 for junks
-
-                switch (fishType) {
-                    case 1:
-                        if (Configuration.CatchCrates) PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
-                        break;
-                    case 2:
-                        if (Configuration.CatchAccessories) PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
-                        break;
-                    case 3:
-                        if (Configuration.CatchTools) PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
-                        break;
-                    case 4:
-                        if (Configuration.CatchQuestFishes) PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
-                        break;
-                    case 5:
-                        if (Configuration.CatchJunks) PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
-                        break;
-                    default:
-                        if (Configuration.CatchNormalCatches) PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
-                        break;
-                }
             }
         }
 
