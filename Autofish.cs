@@ -63,6 +63,7 @@ namespace Autofish
                     if (item.accessory) fishType = 2; // 2 for accessories
                     if (item.damage > 0) fishType = 3; // 3 for weapons and tools
                     if (item.questItem) fishType = 4; // 4 for quests
+                    if (fishType == 0 && item.rare <= ItemRarityID.White) fishType = 5; // 5 for wastes
 
                     switch (fishType) {
                         case 1:
@@ -76,6 +77,9 @@ namespace Autofish
                             break;
                         case 4:
                             if (Configuration.CatchQuestFishes) player.PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
+                            break;
+                        case 5:
+                            if (Configuration.CatchWhiteRarityCatches) player.PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
                             break;
                         default:
                             if (Configuration.CatchNormalCatches) player.PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
@@ -117,7 +121,13 @@ namespace Autofish
         [DefaultValue(true)]
         public bool CatchQuestFishes;
 
-        [Label("$Mods.Autofish.Configs.CatchNormalCatches")]
+        [Label("$Mods.Autofish.Configs.CatchWhiteRarityCatchesLabel")]
+        [Tooltip("$Mods.Autofish.Configs.CatchWhiteRarityCatchesTooltip")]
+        [DefaultValue(false)]
+        public bool CatchWhiteRarityCatches;
+
+        [Label("$Mods.Autofish.Configs.CatchNormalCatchesLabel")]
+        [Tooltip("$Mods.Autofish.Configs.CatchNormalCatchesTooltip")]
         [DefaultValue(true)]
         public bool CatchNormalCatches;
     }
