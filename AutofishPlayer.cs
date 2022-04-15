@@ -40,7 +40,7 @@ namespace Autofish
                 if (PullTimer == 0) {
                     player.controlUseItem = true;
                     player.releaseUseItem = true;
-                    player.ItemCheck(player.selectedItem);
+                    player.ItemCheck(player.whoAmI);
                 }
             }
             if (Autocast) {
@@ -62,7 +62,7 @@ namespace Autofish
 
                 player.controlUseItem = true;
                 player.releaseUseItem = true;
-                player.ItemCheck(player.selectedItem); // 1.3进行ItemCheck即可抛竿，不需再NewProj
+                player.ItemCheck(player.whoAmI); // 1.3进行ItemCheck即可抛竿，不需再NewProj
                 AutocastDelay = 10;
             }
         }
