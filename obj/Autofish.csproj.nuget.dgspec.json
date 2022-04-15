@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "F:\\Documents\\My Games\\Terraria\\ModLoader\\Beta\\Mod Sources\\Autofish\\Autofish.csproj": {}
+    "F:\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Autofish\\Autofish.csproj": {}
   },
   "projects": {
-    "F:\\Documents\\My Games\\Terraria\\ModLoader\\Beta\\Mod Sources\\Autofish\\Autofish.csproj": {
+    "F:\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Autofish\\Autofish.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "F:\\Documents\\My Games\\Terraria\\ModLoader\\Beta\\Mod Sources\\Autofish\\Autofish.csproj",
+        "projectUniqueName": "F:\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Autofish\\Autofish.csproj",
         "projectName": "Autofish",
-        "projectPath": "F:\\Documents\\My Games\\Terraria\\ModLoader\\Beta\\Mod Sources\\Autofish\\Autofish.csproj",
+        "projectPath": "F:\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Autofish\\Autofish.csproj",
         "packagesPath": "C:\\Users\\Administrator\\.nuget\\packages\\",
-        "outputPath": "F:\\Documents\\My Games\\Terraria\\ModLoader\\Beta\\Mod Sources\\Autofish\\obj\\",
+        "outputPath": "F:\\Documents\\My Games\\Terraria\\tModLoader\\ModSources\\Autofish\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Administrator\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -60,7 +60,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.200\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -2,6 +2,7 @@
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
+using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameInput;
@@ -12,21 +13,15 @@ namespace Autofish
 {
     public class AutofishPlayer : ModPlayer
     {
+        internal static Configuration Configuration;
         internal bool Lockcast = false;
         internal Point CastPosition;
         internal int PullTimer = 0;
+        internal bool ActivatedByMod = false; // check if this item use is activated by Mod
         internal bool Autocast = false;
         internal int AutocastDelay = 0;
 
         public override void ProcessTriggers(TriggersSet triggersSet) {
-            if (Autofish.AutocastKeybind.JustPressed) {
-                Autocast = !Autocast;
-                if (Autocast) {
-                    Main.NewText("Auto cast bobbers are now [c/22CC22:activated].");
-                    return;
-                }
-                Main.NewText("Auto cast bobbers are now [c/BB2222:deactivated].");
-            }
             if (Autofish.LockcastDirectionKeybind.JustPressed) {
                 Lockcast = !Lockcast;
                 if (Lockcast) {
@@ -39,24 +34,28 @@ namespace Autofish
         }
 
         public override void PreUpdate() {
+            if (Player.whoAmI != Main.myPlayer)
+                return;
+
+            ActivatedByMod = false;
             if (PullTimer > 0) {
                 PullTimer--;
                 if (PullTimer == 0) {
                     Player.controlUseItem = true;
                     Player.releaseUseItem = true;
-                    Player.ItemCheck(Player.selectedItem);
+                    ActivatedByMod = true;
+                    Player.ItemCheck(Player.whoAmI);
                 }
             }
+
             if (Autocast) {
                 AutocastDelay--;
-                if (Player.HeldItem.fishingPole == 0 || AutocastDelay > 0) {
+                if (Player.HeldItem.fishingPole == 0) {
+                    Autocast = false; // 当前物品不是鱼竿，关闭自动抛竿
                     return;
                 }
-                for (int i = 0; i < 1000; i++) {
-                    Projectile projectile = Main.projectile[i];
-                    if (projectile.active && projectile.owner == Player.whoAmI && projectile.bobber) {
-                        return;
-                    }
+                if (AutocastDelay > 0 || CheckBobbersActive(Player.whoAmI)) {
+                    return;
                 }
 
                 var mouseX = Main.mouseX; var mouseY = Main.mouseY;
@@ -65,17 +64,21 @@ namespace Autofish
                     Main.mouseY = CastPosition.Y - (int)Main.screenPosition.Y;
                 }
 
-                var item = Player.inventory[Player.selectedItem];
                 Player.controlUseItem = true;
                 Player.releaseUseItem = true;
-                Player.ItemCheck(Player.selectedItem); // casting animation
-                if (CombinedHooks.CanShoot(Player, item)) {
-                    Projectile.NewProjectile(Player.GetProjectileSource_Item(Player.HeldItem), Player.Center, Vector2.Normalize(Main.MouseWorld - Player.Center) * Player.HeldItem.shootSpeed, Player.HeldItem.shoot, 0, 0f, Player.whoAmI);
-                }
+                ActivatedByMod = true;
+                Player.ItemCheck(Player.whoAmI);
                 AutocastDelay = 10;
 
                 if (Lockcast) { Main.mouseX = mouseX; Main.mouseY = mouseY; }
             }
+        }
+
+        public static bool CheckBobbersActive(int whoAmI) {
+            foreach (var proj in from p in Main.projectile where p.active && p.owner == whoAmI && p.bobber select p) {
+                return true;
+            }
+            return false;
         }
 
         public override void OnEnterWorld(Player player) {
@@ -86,8 +89,29 @@ namespace Autofish
         }
 
         public override void Load() {
+            On.Terraria.Player.ItemCheck_CheckFishingBobbers += Player_ItemCheck_CheckFishingBobbers;
+            On.Terraria.Player.ItemCheck_Shoot += Player_ItemCheck_Shoot;
             IL.Terraria.Projectile.FishingCheck += Projectile_FishingCheck;
             base.Load();
+        }
+
+        private bool Player_ItemCheck_CheckFishingBobbers(On.Terraria.Player.orig_ItemCheck_CheckFishingBobbers orig, Player player, bool canUse) {
+            // 只有当执行收杆动作，且是玩家执行的时，才会关闭效果
+            // 只有whoAmI=myPlayer才会执行这里，所以不需要判断
+            bool flag = orig.Invoke(player, canUse); // 返回值若为false，则是拉杆
+            if (!flag && player.whoAmI == Main.myPlayer && player.TryGetModPlayer(out AutofishPlayer modPlayer) && !modPlayer.ActivatedByMod) {
+                modPlayer.Autocast = false;
+            }
+            return flag;
+        }
+
+        // 注意：收杆根本不会执行这个方法
+        private void Player_ItemCheck_Shoot(On.Terraria.Player.orig_ItemCheck_Shoot orig, Player player, int i, Item sItem, int weaponDamage) {
+            // 只有当执行抛竿动作，且是玩家执行的时，才会开启效果
+            if (player.whoAmI == Main.myPlayer && player.TryGetModPlayer(out AutofishPlayer modPlayer) && !modPlayer.ActivatedByMod && sItem.fishingPole > 0) {
+                modPlayer.Autocast = true;
+            }
+            orig.Invoke(player, i, sItem, weaponDamage);
         }
 
         // 用PlayerLoader的话可能会存在因Mod加载顺序不同而出现冲突的Bug
@@ -97,22 +121,44 @@ namespace Autofish
             if (!c.TryGotoNext(MoveType.After, i => i.MatchLdfld(typeof(FishingAttempt), nameof(FishingAttempt.rolledItemDrop))))
                 throw new Exception("Hook location not found, if (fisher.rolledItemDrop > 0)");
             c.Emit(OpCodes.Ldarg_0); // 推入当前Projectile实例
-            c.EmitDelegate<Func<int, Projectile, int>>((returnValue, projectile) => {
+            c.EmitDelegate<Func<int, Projectile, int>>((caughtType, projectile) => {
+                if (projectile.owner != Main.myPlayer || !Main.player[projectile.owner].active || Main.player[projectile.owner].dead)
+                    return caughtType;
+
                 var player = Main.player[projectile.owner].GetModPlayer<AutofishPlayer>();
-                if (player.PullTimer == 0 && returnValue > 0) {
+                if (player.PullTimer == 0 && caughtType > 0) {
                     var item = new Item();
-                    item.SetDefaults(returnValue);
+                    item.SetDefaults(caughtType);
 
-                    if ((ItemID.Sets.IsFishingCrate[returnValue] && ModContent.GetInstance<Configuration>().CatchCrates)
-                        || (item.accessory && ModContent.GetInstance<Configuration>().CatchAccessories)
-                        || (item.damage > 0 && ModContent.GetInstance<Configuration>().CatchTools)
-                        || (item.questItem && ModContent.GetInstance<Configuration>().CatchQuestFishes))
-                        player.PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
+                    int fishType = 0; // 0 for normal
+                    if (ItemID.Sets.IsFishingCrate[caughtType]) fishType = 1; // 1 for vanilla crates
+                    if (item.accessory) fishType = 2; // 2 for accessories
+                    if (item.damage > 0) fishType = 3; // 3 for weapons and tools
+                    if (item.questItem) fishType = 4; // 4 for quests
+                    if (fishType == 0 && item.OriginalRarity <= ItemRarityID.White) fishType = 5; // 5 for wastes
 
-                    if (!ItemID.Sets.IsFishingCrate[returnValue] && !item.accessory && item.damage <= 0 && !item.questItem && ModContent.GetInstance<Configuration>().CatchNormalCatches)
-                        player.PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
+                    switch (fishType) {
+                        case 1:
+                            if (Configuration.CatchCrates) player.PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
+                            break;
+                        case 2:
+                            if (Configuration.CatchAccessories) player.PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
+                            break;
+                        case 3:
+                            if (Configuration.CatchTools) player.PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
+                            break;
+                        case 4:
+                            if (Configuration.CatchQuestFishes) player.PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
+                            break;
+                        case 5:
+                            if (Configuration.CatchWhiteRarityCatches) player.PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
+                            break;
+                        default:
+                            if (Configuration.CatchNormalCatches) player.PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
+                            break;
+                    }
                 }
-                return returnValue; // 怎么来的怎么走
+                return caughtType; // 怎么来的怎么走
             });
 
             // 钓出怪物的代码，原理和上方都一样
@@ -120,12 +166,15 @@ namespace Autofish
             if (!c.TryGotoNext(MoveType.After, i => i.MatchLdfld(typeof(FishingAttempt), nameof(FishingAttempt.rolledEnemySpawn))))
                 throw new Exception("Hook location not found, if (fisher.rolledEnemySpawn > 0)");
             c.Emit(OpCodes.Ldarg_0); // 推入当前Projectile实例
-            c.EmitDelegate<Func<int, Projectile, int>>((returnValue, projectile) => {
+            c.EmitDelegate<Func<int, Projectile, int>>((caughtType, projectile) => {
+                if (projectile.owner != Main.myPlayer || !Main.player[projectile.owner].active || Main.player[projectile.owner].dead)
+                    return caughtType;
+
                 var player = Main.player[projectile.owner].GetModPlayer<AutofishPlayer>();
-                if (returnValue > 0 && ModContent.GetInstance<Configuration>().CatchEnemies && player.PullTimer == 0) {
-                    player.PullTimer = (int)(ModContent.GetInstance<Configuration>().PullingDelay * 60 + 1);
+                if (caughtType > 0 && Configuration.CatchEnemies && player.PullTimer == 0) {
+                    player.PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
                 }
-                return returnValue; // 怎么来的怎么走
+                return caughtType; // 怎么来的怎么走
             });
         }
     }

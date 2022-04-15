@@ -6,20 +6,16 @@ using Terraria.ModLoader.Config;
 
 namespace Autofish
 {
-	public class Autofish : Mod
+    public class Autofish : Mod
     {
         public static ModKeybind AutocastKeybind;
         public static ModKeybind LockcastDirectionKeybind;
 
-        public override void Load()
-        {
-            AutocastKeybind = KeybindLoader.RegisterKeybind(this, "Toggle Auto Cast Fishing Pole", "Y");
+        public override void Load() {
             LockcastDirectionKeybind = KeybindLoader.RegisterKeybind(this, "Lock Casting Target To Cursor", "L");
         }
 
-        public override void Unload()
-        {
-            AutocastKeybind = null;
+        public override void Unload() {
             LockcastDirectionKeybind = null;
         }
     }
@@ -28,6 +24,8 @@ namespace Autofish
     public class Configuration : ModConfig
     {
         public override ConfigScope Mode => ConfigScope.ClientSide;
+
+        public override void OnLoaded() => AutofishPlayer.Configuration = this;
 
         [Label("$Mods.Autofish.Config.PullingDelay.Label")]
         [Tooltip("$Mods.Autofish.Config.PullingDelay.Tooltip")]
@@ -52,7 +50,13 @@ namespace Autofish
         [DefaultValue(true)]
         public bool CatchQuestFishes;
 
-        [Label("$Mods.Autofish.Config.CatchNormalCatches")]
+        [Label("$Mods.Autofish.Config.CatchWhiteRarityCatches.Label")]
+        [Tooltip("$Mods.Autofish.Config.CatchWhiteRarityCatches.Tooltip")]
+        [DefaultValue(false)]
+        public bool CatchWhiteRarityCatches;
+
+        [Label("$Mods.Autofish.Config.CatchNormalCatches.Label")]
+        [Tooltip("$Mods.Autofish.Config.CatchNormalCatches.Tooltip")]
         [DefaultValue(true)]
         public bool CatchNormalCatches;
 

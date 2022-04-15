@@ -4,13 +4,20 @@
 			Label: 自动钓鱼配置面板
 			PullingDelay: {
 				Label: 拉鱼线延迟（秒）
-				Tooltip: 设置检测到鱼后拉浮标的延迟时间。
+				Tooltip: 设置检测到鱼后拉浮标的延迟时间
 			}
 			CatchCrates: "[i:2356] 自动钓宝匣"
 			CatchAccessories: "[i:2423] 自动钓饰品"
 			CatchTools: "[i:2341] 自动钓工具和武器"
 			CatchQuestFishes: "[i:2487] 自动钓任务鱼"
-			CatchNormalCatches: "[i:2290] 自动钓一般渔获"
+			CatchWhiteRarityCatches: {
+				Label: "[i:2290] 自动钓白/灰色稀有度一般渔获"
+				Tooltip: 如果启用，你将捕捉到稀有度为白色或灰色的渔获
+			}
+			CatchNormalCatches: {
+				Label: "[i:2308] 自动钓高稀有度一般渔获"
+				Tooltip: 如果启用，你将捕捉到稀有度高于白色（不包括白色）的渔获
+			}
 			CatchEnemies: "[i:4271] 自动钓血月怪物"
 		}
 	}

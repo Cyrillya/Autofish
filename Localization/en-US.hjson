@@ -10,7 +10,14 @@ Mods: {
 			CatchAccessories: "[i:2423] Auto Catch Accessories"
 			CatchTools: "[i:2341] Auto Catch Tools and Weapons"
 			CatchQuestFishes: "[i:2487] Auto Catch Quest Fishes"
-			CatchNormalCatches: "[i:2290] Auto Catch Normal Catches"
+			CatchWhiteRarityCatches: {
+				Label: "[i:2290] Auto Catch White/Grey Rarity Normal Catches"
+				Tooltip: If enabled, you will catch catches with a white or gray rarity
+			}
+			CatchNormalCatches: {
+				Label: "[i:2308] Auto Catch High Rarity Normal Catches"
+				Tooltip: If enabled, you will catch normal catches with rarity higher than white (not including white).
+			}
 			CatchEnemies: "[i:4271] Auto Catch All Bloodmoon Enemies"
 		}
 	}
