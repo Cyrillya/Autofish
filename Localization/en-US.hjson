@@ -2,10 +2,15 @@ Mods: {
 	Autofish: {
 		Config: {
 			Label: Autofish Configuration
+			AutoCatch: {
+				Label: "Auto Pull"
+				Tooltip: The line will be auto pulled and the filters will be useful if enabled
+			}
 			PullingDelay: {
 				Label: Auto Catch Pulling Delay (Seconds)
-				Tooltip: The delay of pulling bobber up after detecting available fish.
+				Tooltip: The delay of pulling bobber up after detecting available fish
 			}
+			Filters: "Filters (only available when Sonar Buff activated)"
 			CatchCrates: "[i:2356] Auto Catch Crates"
 			CatchAccessories: "[i:2423] Auto Catch Accessories"
 			CatchTools: "[i:2341] Auto Catch Tools and Weapons"
@@ -16,9 +21,13 @@ Mods: {
 			}
 			CatchNormalCatches: {
 				Label: "[i:2308] Auto Catch High Rarity Normal Catches"
-				Tooltip: If enabled, you will catch normal catches with rarity higher than white (not including white).
+				Tooltip: If enabled, you will catch normal catches with rarity higher than white (not including white)
 			}
 			CatchEnemies: "[i:4271] Auto Catch All Bloodmoon Enemies"
+			OtherCatches: {
+				Label: "[i:2676] Other catches:"
+				Tooltip: These catches will also be caught
+			}
 		}
 	}
 }

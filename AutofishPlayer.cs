@@ -8,6 +8,7 @@ using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
 using Terraria.ModLoader;
+using Terraria.ModLoader.Config;
 
 namespace Autofish
 {
@@ -122,11 +123,22 @@ namespace Autofish
                 throw new Exception("Hook location not found, if (fisher.rolledItemDrop > 0)");
             c.Emit(OpCodes.Ldarg_0); // 推入当前Projectile实例
             c.EmitDelegate<Func<int, Projectile, int>>((caughtType, projectile) => {
-                if (projectile.owner != Main.myPlayer || !Main.player[projectile.owner].active || Main.player[projectile.owner].dead)
+                if (projectile.owner != Main.myPlayer || !Main.player[projectile.owner].active || Main.player[projectile.owner].dead || !Configuration.AutoCatch)
                     return caughtType;
 
                 var player = Main.player[projectile.owner].GetModPlayer<AutofishPlayer>();
                 if (player.PullTimer == 0 && caughtType > 0) {
+                    if (!Main.player[projectile.owner].sonarPotion) {
+                        player.PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
+                        return caughtType; // 没有声纳药水都是无脑拉
+                    }
+
+                    ItemDefinition itemDefinition = new(caughtType);
+                    if (Configuration.OtherCatches.Contains(itemDefinition)) {
+                        player.PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
+                        return caughtType; // 额外清单里包含直接拉
+                    }
+
                     var item = new Item();
                     item.SetDefaults(caughtType);
 

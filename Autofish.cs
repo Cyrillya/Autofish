@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.ComponentModel;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
@@ -25,12 +26,19 @@ namespace Autofish
 
         public override void OnLoaded() => AutofishPlayer.Configuration = this;
 
+        [Label("$Mods.Autofish.Config.AutoCatch.Label")]
+        [Tooltip("$Mods.Autofish.Config.AutoCatch.Tooltip")]
+        [DefaultValue(true)]
+        public bool AutoCatch;
+
         [Label("$Mods.Autofish.Config.PullingDelay.Label")]
         [Tooltip("$Mods.Autofish.Config.PullingDelay.Tooltip")]
         [Range(0f, 1.5f)]
         [Increment(.1f)]
         [DefaultValue(.5f)]
         public float PullingDelay;
+
+        [Header("$Mods.Autofish.Config.Filters")]
 
         [Label("$Mods.Autofish.Config.CatchCrates")]
         [DefaultValue(true)]
@@ -61,5 +69,9 @@ namespace Autofish
         [Label("$Mods.Autofish.Config.CatchEnemies")]
         [DefaultValue(true)]
         public bool CatchEnemies;
+
+        [Label("$Mods.Autofish.Config.OtherCatches.Label")]
+        [Tooltip("$Mods.Autofish.Config.OtherCatches.Tooltip")]
+        public List<ItemDefinition> OtherCatches;
     }
 }
