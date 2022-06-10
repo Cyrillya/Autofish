@@ -10,7 +10,7 @@ Mods: {
 				Label: Auto Catch Pulling Delay (Seconds)
 				Tooltip: The delay of pulling bobber up after detecting available fish
 			}
-			Filters: "Filters (only available when Sonar Buff activated)"
+			Filters: "Filters [c/DD2222:(only available when Sonar Buff activated!)]"
 			CatchCrates: "[i:2356] Auto Catch Crates"
 			CatchAccessories: "[i:2423] Auto Catch Accessories"
 			CatchTools: "[i:2341] Auto Catch Tools and Weapons"
@@ -28,6 +28,21 @@ Mods: {
 				Label: "[i:2676] Other catches:"
 				Tooltip: These catches will also be caught
 			}
+			Utilities: 
+			'''
+			Utilities
+			After you drink a potion, if there is a corresponding potion in the inventory
+			will automatically re-drink.
+			Right click the buff to cancel it
+			'''
+			AutoSonar: "[i:2355] Auto Sonar Potion"
+			AutoFishing: "[i:2354] Auto Fishing Potion"
+			AutoCrate: "[i:2356] Auto Crate Potion"
+		}
+		Tips: {
+			TargetLock: "Casting target are now [c/22CC22:locked] to current cursor position."
+			TargetUnlock: "Casting target are now [c/BB2222:unlocked]."
+			PotionsRanOut: "Already ran out of {0}."
 		}
 	}
 }

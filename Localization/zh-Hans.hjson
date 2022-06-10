@@ -10,7 +10,7 @@
 				Label: 拉鱼线延迟（秒）
 				Tooltip: 设置检测到鱼后拉浮标的延迟时间
 			}
-			Filters: "过滤器选项（仅在获得声纳Buff时可用）"
+			Filters: "过滤器选项[c/DD2222:（仅在获得声纳Buff时可用！）]"
 			CatchCrates: "[i:2356] 自动钓宝匣"
 			CatchAccessories: "[i:2423] 自动钓饰品"
 			CatchTools: "[i:2341] 自动钓工具和武器"
@@ -28,6 +28,20 @@
 				Label: "[i:2676] 其他自动捕捉物品："
 				Tooltip: 相应渔获将被捕捉
 			}
+			Utilities: 
+			'''
+			功能
+			在你喝下一次药水后，如果物品栏内有相应药水会自动补上
+			右键取消Buff则会停止
+			'''
+			AutoSonar: "[i:2355] 自动喝声呐药水"
+			AutoFishing: "[i:2354] 自动喝钓鱼药水"
+			AutoCrate: "[i:2356] 自动喝宝匣药水"
+		}
+		Tips: {
+			TargetLock: "抛竿目标点已[c/22CC22:锁定]至当前鼠标位置"
+			TargetUnlock: "抛竿目标点[c/BB2222:不再锁定]"
+			PotionsRanOut: "已用光{0}"
 		}
 	}
 }

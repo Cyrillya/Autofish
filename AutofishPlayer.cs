@@ -2,11 +2,13 @@
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameInput;
 using Terraria.ID;
+using Terraria.Localization;
 using Terraria.ModLoader;
 using Terraria.ModLoader.Config;
 
@@ -27,10 +29,10 @@ namespace Autofish
                 Lockcast = !Lockcast;
                 if (Lockcast) {
                     CastPosition = Main.MouseWorld.ToPoint();
-                    Main.NewText("Casting target are now [c/22CC22:locked] to current cursor position.");
+                    Main.NewText(Language.GetTextValue("Mods.Autofish.Tips.TargetLock"));
                     return;
                 }
-                Main.NewText("Casting target are now [c/BB2222:unlocked].");
+                Main.NewText(Language.GetTextValue("Mods.Autofish.Tips.TargetUnlock"));
             }
         }
 
@@ -96,6 +98,10 @@ namespace Autofish
             base.Load();
         }
 
+        public override void Unload() {
+            Configuration = null;
+        }
+
         private bool Player_ItemCheck_CheckFishingBobbers(On.Terraria.Player.orig_ItemCheck_CheckFishingBobbers orig, Player player, bool canUse) {
             // 只有当执行收杆动作，且是玩家执行的时，才会关闭效果
             // 只有whoAmI=myPlayer才会执行这里，所以不需要判断
@@ -134,7 +140,7 @@ namespace Autofish
                     }
 
                     ItemDefinition itemDefinition = new(caughtType);
-                    if (Configuration.OtherCatches.Contains(itemDefinition)) {
+                    if (Configuration.OtherCatches is not null && Configuration.OtherCatches.Contains(itemDefinition)) {
                         player.PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
                         return caughtType; // 额外清单里包含直接拉
                     }

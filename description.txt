@@ -4,34 +4,42 @@ Auto Casting mode will automatically turn on when you are fishing and turn off w
 You can see this mod's source code here: https://github.com/Crapsky233/Autofish
 
 Configuration:
-"Auto Pull": The line will be auto pulled and the filters will be useful if enabled
-"Pulling Delay": The delay of pulling bobber up after detecting available fish
+Auto Pull: The line will be auto pulled and the filters will be useful if enabled
+Pulling Delay: The delay of pulling bobber up after detecting available fish
 Filters:
-"[i:2356] Auto Catch Crates"
-"[i:2423] Auto Catch Accessories"
-"[i:2341] Auto Catch Tools and Weapons"
-"[i:2487] Auto Catch Quest Fishes"
-"[i:2290] Auto Catch White/Grey Rarity Normal Catches"
-"[i:2308] Auto Catch High Rarity Normal Catches"
-"[i:4271] Auto Catch All Bloodmoon Enemies"
+[i:2356] Auto Catch Crates
+[i:2423] Auto Catch Accessories
+[i:2341] Auto Catch Tools and Weapons
+[i:2487] Auto Catch Quest Fishes
+[i:2290] Auto Catch White/Grey Rarity Normal Catches
+[i:2308] Auto Catch High Rarity Normal Catches
+[i:4271] Auto Catch All Bloodmoon Enemies
+Utilities:
+[i:2355] Auto Sonar Potion
+[i:2354] Auto Fishing Potion
+[i:2356] Auto Crate Potion
 Hotkeys:
-"Lock Casting Target To Cursor": Lock the casting target to cursor. Bobbers will be casted to a locked position wherever the cursor at. Only useful when activating "Auto Cast Fishing Pole".
+Lock Casting Target To Cursor: Lock the casting target to cursor. Bobbers will be casted to a locked position wherever the cursor at. Only useful when activating Auto Cast Fishing Pole.
 
 这个模组可以让你自动钓鱼。当拿着钓鱼竿时自动抛/收鱼线。
 自动抛竿模式会当你钓鱼时自动打开，在你停止钓鱼时自动关闭。
 
 设置选项:
-"自动拉线": 只有当你启动该项时才会自动拉鱼线，过滤器选项才会有用
-"拉鱼线延迟（秒）": 设置检测到鱼后拉浮标的延迟时间
+自动拉线: 只有当你启动该项时才会自动拉鱼线，过滤器选项才会有用
+拉鱼线延迟（秒）: 设置检测到鱼后拉浮标的延迟时间
 钓鱼过滤器选项：
-"[i:2356] 自动钓宝匣"
-"[i:2423] 自动钓饰品"
-"[i:2341] 自动钓工具和武器"
-"[i:2487] 自动钓任务鱼"
-"[i:2290] 自动钓白/灰色稀有度一般渔获"
-"[i:2308] 自动钓高稀有度一般渔获"
-"[i:4271] 自动钓血月怪物"
+[i:2356] 自动钓宝匣
+[i:2423] 自动钓饰品
+[i:2341] 自动钓工具和武器
+[i:2487] 自动钓任务鱼
+[i:2290] 自动钓白/灰色稀有度一般渔获
+[i:2308] 自动钓高稀有度一般渔获
+[i:4271] 自动钓血月怪物
+功能
+[i:2355] 自动喝声呐药水
+[i:2354] 自动喝钓鱼药水
+[i:2356] 自动喝宝匣药水
 快捷键：
-“Lock Casting Target To Cursor”：将鱼钩投射目标锁定到光标，开启后浮标将被投射到锁定位置。仅在激活“自动投射钓鱼竿”时有用
+Lock Casting Target To Cursor：将鱼钩投射目标锁定到光标，开启后浮标将被投射到锁定位置。仅在激活“自动投射钓鱼竿”时有用
 
 Github: https://github.com/Crapsky233/Autofish

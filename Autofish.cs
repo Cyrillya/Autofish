@@ -7,7 +7,6 @@ namespace Autofish
 {
     public class Autofish : Mod
     {
-        public static ModKeybind AutocastKeybind;
         public static ModKeybind LockcastDirectionKeybind;
 
         public override void Load() {
@@ -73,5 +72,19 @@ namespace Autofish
         [Label("$Mods.Autofish.Config.OtherCatches.Label")]
         [Tooltip("$Mods.Autofish.Config.OtherCatches.Tooltip")]
         public List<ItemDefinition> OtherCatches;
+
+        [Header("$Mods.Autofish.Config.Utilities")]
+
+        [Label("$Mods.Autofish.Config.AutoSonar")]
+        [DefaultValue(false)]
+        public bool AutoSonar;
+
+        [Label("$Mods.Autofish.Config.AutoFishing")]
+        [DefaultValue(false)]
+        public bool AutoFishing;
+
+        [Label("$Mods.Autofish.Config.AutoCrate")]
+        [DefaultValue(false)]
+        public bool AutoCrate;
     }
 }
