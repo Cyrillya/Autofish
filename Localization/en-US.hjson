@@ -31,8 +31,7 @@ Mods: {
 			Utilities: 
 			'''
 			Utilities
-			After you drink a potion, if there is a corresponding potion in the inventory
-			will automatically re-drink.
+			After you drink a potion, if there is a corresponding potion in the inventory will automatically re-drink.
 			Right click the buff to cancel it
 			'''
 			AutoSonar: "[i:2355] Auto Sonar Potion"
