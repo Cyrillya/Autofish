@@ -25,15 +25,19 @@ Mods: {
 			}
 			CatchEnemies: "[i:4271] Auto Catch All Bloodmoon Enemies"
 			OtherCatches: {
-				Label: "[i:2676] Other catches:"
+				Label: "[i:2676] Other catches"
 				Tooltip: These catches will also be caught
 			}
+			Blacklist: {
+				Label: "[i:5064] Blacklist"
+				Tooltip: These catches will not be caught
+			}
 			Utilities: 
-			'''
-			Utilities
-			After you drink a potion, if there is a corresponding potion in the inventory will automatically re-drink.
-			Right click the buff to cancel it
-			'''
+				'''
+				Utilities
+				After you drink a potion, if there is a corresponding potion in the inventory will automatically re-drink.
+				Right click the buff to cancel it
+				'''
 			AutoSonar: "[i:2355] Auto Sonar Potion"
 			AutoFishing: "[i:2354] Auto Fishing Potion"
 			AutoCrate: "[i:2356] Auto Crate Potion"

@@ -140,6 +140,11 @@ namespace Autofish
                     }
 
                     ItemDefinition itemDefinition = new(caughtType);
+
+                    if (Configuration.Blacklist is not null && Configuration.Blacklist.Contains(itemDefinition)) {
+                        return caughtType; // 黑名单里面的不拉
+                    }
+
                     if (Configuration.OtherCatches is not null && Configuration.OtherCatches.Contains(itemDefinition)) {
                         player.PullTimer = (int)(Configuration.PullingDelay * 60 + 1);
                         return caughtType; // 额外清单里包含直接拉

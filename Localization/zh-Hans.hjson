@@ -25,15 +25,19 @@
 			}
 			CatchEnemies: "[i:4271] 自动钓血月怪物"
 			OtherCatches: {
-				Label: "[i:2676] 其他自动捕捉物品："
+				Label: "[i:2676] 其他自动捕捉物品"
 				Tooltip: 相应渔获将被捕捉
 			}
+			Blacklist: {
+				Label: "[i:5064] 渔获黑名单"
+				Tooltip: 相应渔获将不会被捕捉
+			}
 			Utilities: 
-			'''
-			功能
-			在你喝下一次药水后，如果物品栏内有相应药水会自动补上
-			右键取消Buff则会停止
-			'''
+				'''
+				功能
+				在你喝下一次药水后，如果物品栏内有相应药水会自动补上
+				右键取消Buff则会停止
+				'''
 			AutoSonar: "[i:2355] 自动喝声呐药水"
 			AutoFishing: "[i:2354] 自动喝钓鱼药水"
 			AutoCrate: "[i:2356] 自动喝宝匣药水"

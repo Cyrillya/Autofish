@@ -73,6 +73,10 @@ namespace Autofish
         [Tooltip("$Mods.Autofish.Config.OtherCatches.Tooltip")]
         public List<ItemDefinition> OtherCatches;
 
+        [Label("$Mods.Autofish.Config.Blacklist.Label")]
+        [Tooltip("$Mods.Autofish.Config.Blacklist.Tooltip")]
+        public List<ItemDefinition> Blacklist;
+
         [Header("$Mods.Autofish.Config.Utilities")]
 
         [Label("$Mods.Autofish.Config.AutoSonar")]
