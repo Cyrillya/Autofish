@@ -40,6 +40,6 @@ Lock Casting Target To Cursor: Lock the casting target to cursor. Bobbers will b
 [i:2354] 自动喝钓鱼药水
 [i:2356] 自动喝宝匣药水
 快捷键：
-Lock Casting Target To Cursor：将鱼钩投射目标锁定到光标，开启后浮标将被投射到锁定位置。仅在激活“自动投射钓鱼竿”时有用
+将抛竿目标点锁定至鼠标位置：将鱼钩投射目标锁定到光标，开启后浮标将被投射到锁定位置。仅在激活“自动投射钓鱼竿”时有用
 
 Github: https://github.com/Crapsky233/Autofish

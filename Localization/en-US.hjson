@@ -1,51 +1,97 @@
 Mods: {
 	Autofish: {
-		Config: {
-			Label: Autofish Configuration
-			AutoCatch: {
-				Label: "Auto Pull"
-				Tooltip: The line will be auto pulled and the filters will be useful if enabled
-			}
-			PullingDelay: {
-				Label: Auto Catch Pulling Delay (Seconds)
-				Tooltip: The delay of pulling bobber up after detecting available fish
-			}
-			Filters: "Filters [c/DD2222:(only available when Sonar Buff activated!)]"
-			CatchCrates: "[i:2356] Auto Catch Crates"
-			CatchAccessories: "[i:2423] Auto Catch Accessories"
-			CatchTools: "[i:2341] Auto Catch Tools and Weapons"
-			CatchQuestFishes: "[i:2487] Auto Catch Quest Fishes"
-			CatchWhiteRarityCatches: {
-				Label: "[i:2290] Auto Catch White/Grey Rarity Normal Catches"
-				Tooltip: If enabled, you will catch catches with a white or gray rarity
-			}
-			CatchNormalCatches: {
-				Label: "[i:2308] Auto Catch High Rarity Normal Catches"
-				Tooltip: If enabled, you will catch normal catches with rarity higher than white (not including white)
-			}
-			CatchEnemies: "[i:4271] Auto Catch All Bloodmoon Enemies"
-			OtherCatches: {
-				Label: "[i:2676] Other catches"
-				Tooltip: These catches will also be caught
-			}
-			Blacklist: {
-				Label: "[i:5064] Blacklist"
-				Tooltip: These catches will not be caught
-			}
-			Utilities: 
-				'''
-				Utilities
-				After you drink a potion, if there is a corresponding potion in the inventory will automatically re-drink.
-				Right click the buff to cancel it
-				'''
-			AutoSonar: "[i:2355] Auto Sonar Potion"
-			AutoFishing: "[i:2354] Auto Fishing Potion"
-			AutoCrate: "[i:2356] Auto Crate Potion"
-		}
 		Tips: {
-			TargetLock: "Casting target are now [c/22CC22:locked] to current cursor position."
-			TargetUnlock: "Casting target are now [c/BB2222:unlocked]."
-			PotionsRanOut: "Already ran out of {0}."
+			TargetLock: Casting target are now [c/22CC22:locked] to current cursor position.
+			TargetUnlock: Casting target are now [c/BB2222:unlocked].
+			PotionsRanOut: Already ran out of {0}.
 		}
+
+		Configs: {
+			Configuration: {
+				AutoCatch: {
+					Label: Auto Pull
+					Tooltip: The line will be auto pulled and the filters will be useful if enabled
+				}
+
+				PullingDelay: {
+					Label: Auto Catch Pulling Delay (Seconds)
+					Tooltip: The delay of pulling bobber up after detecting available fish
+				}
+
+				CatchCrates: {
+					Label: "[i:2356] Auto Catch Crates"
+					Tooltip: ""
+				}
+
+				CatchAccessories: {
+					Label: "[i:2423] Auto Catch Accessories"
+					Tooltip: ""
+				}
+
+				CatchTools: {
+					Label: "[i:2341] Auto Catch Tools and Weapons"
+					Tooltip: ""
+				}
+
+				CatchQuestFishes: {
+					Label: "[i:2487] Auto Catch Quest Fishes"
+					Tooltip: ""
+				}
+
+				CatchWhiteRarityCatches: {
+					Label: "[i:2290] Auto Catch White/Grey Rarity Normal Catches"
+					Tooltip: If enabled, you will catch catches with a white or gray rarity
+				}
+
+				CatchNormalCatches: {
+					Label: "[i:2308] Auto Catch High Rarity Normal Catches"
+					Tooltip: If enabled, you will catch normal catches with rarity higher than white (not including white)
+				}
+
+				CatchEnemies: {
+					Label: "[i:4271] Auto Catch All Bloodmoon Enemies"
+					Tooltip: ""
+				}
+
+				OtherCatches: {
+					Label: "[i:2676] Other catches"
+					Tooltip: These catches will also be caught
+				}
+
+				Blacklist: {
+					Label: "[i:5064] Blacklist"
+					Tooltip: These catches will not be caught
+				}
+
+				AutoSonar: {
+					Label: "[i:2355] Auto Sonar Potion"
+					Tooltip: ""
+				}
+
+				AutoFishing: {
+					Label: "[i:2354] Auto Fishing Potion"
+					Tooltip: ""
+				}
+
+				AutoCrate: {
+					Label: "[i:2356] Auto Crate Potion"
+					Tooltip: ""
+				}
+
+				DisplayName: Autofish Configuration
+
+				Headers: {
+					Filters: Filters [c/DD4422:(only available when Sonar Buff activated!)]
+					Utilities:
+						'''
+						Utilities
+						After you drink a potion, if there is a corresponding potion in the inventory will automatically re-drink.
+						Right click the buff to cancel it
+						'''
+				}
+			}
+		}
+
+		Keybinds.LockcastDirection.DisplayName: Lock Casting Target To Cursor
 	}
 }

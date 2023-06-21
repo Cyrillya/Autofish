@@ -1,5 +1,5 @@
 displayName = Autofish
 author = -Cyril-
-version = 1.1
+version = 1.2
 side = Client
 homepage = https://github.com/Crapsky233/Autofish

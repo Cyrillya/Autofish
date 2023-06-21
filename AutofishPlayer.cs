@@ -1,9 +1,8 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System;
+using System.Linq;
+using Microsoft.Xna.Framework;
 using Mono.Cecil.Cil;
 using MonoMod.Cil;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using Terraria;
 using Terraria.DataStructures;
 using Terraria.GameInput;
@@ -17,12 +16,12 @@ namespace Autofish
     public class AutofishPlayer : ModPlayer
     {
         internal static Configuration Configuration;
-        internal bool Lockcast = false;
+        internal bool Lockcast;
         internal Point CastPosition;
-        internal int PullTimer = 0;
-        internal bool ActivatedByMod = false; // check if this item use is activated by Mod
-        internal bool Autocast = false;
-        internal int AutocastDelay = 0;
+        internal int PullTimer;
+        internal bool ActivatedByMod; // check if this item use is activated by Mod
+        internal bool Autocast;
+        internal int AutocastDelay;
 
         public override void ProcessTriggers(TriggersSet triggersSet) {
             if (Autofish.LockcastDirectionKeybind.JustPressed) {
@@ -47,7 +46,7 @@ namespace Autofish
                     Player.controlUseItem = true;
                     Player.releaseUseItem = true;
                     ActivatedByMod = true;
-                    Player.ItemCheck(Player.whoAmI);
+                    Player.ItemCheck();
                 }
             }
 
@@ -70,7 +69,7 @@ namespace Autofish
                 Player.controlUseItem = true;
                 Player.releaseUseItem = true;
                 ActivatedByMod = true;
-                Player.ItemCheck(Player.whoAmI);
+                Player.ItemCheck();
                 AutocastDelay = 10;
 
                 if (Lockcast) { Main.mouseX = mouseX; Main.mouseY = mouseY; }
@@ -78,31 +77,29 @@ namespace Autofish
         }
 
         public static bool CheckBobbersActive(int whoAmI) {
-            foreach (var proj in from p in Main.projectile where p.active && p.owner == whoAmI && p.bobber select p) {
+            foreach (var _ in from p in Main.projectile where p.active && p.owner == whoAmI && p.bobber select p) {
                 return true;
             }
             return false;
         }
 
-        public override void OnEnterWorld(Player player) {
+        public override void OnEnterWorld() {
             Lockcast = false;
             CastPosition = default;
             Autocast = false;
-            base.OnEnterWorld(player);
         }
 
         public override void Load() {
-            On.Terraria.Player.ItemCheck_CheckFishingBobbers += Player_ItemCheck_CheckFishingBobbers;
-            On.Terraria.Player.ItemCheck_Shoot += Player_ItemCheck_Shoot;
-            IL.Terraria.Projectile.FishingCheck += Projectile_FishingCheck;
-            base.Load();
+            On_Player.ItemCheck_CheckFishingBobbers += Player_ItemCheck_CheckFishingBobbers;
+            On_Player.ItemCheck_Shoot += Player_ItemCheck_Shoot;
+            IL_Projectile.FishingCheck += Projectile_FishingCheck;
         }
 
         public override void Unload() {
             Configuration = null;
         }
 
-        private bool Player_ItemCheck_CheckFishingBobbers(On.Terraria.Player.orig_ItemCheck_CheckFishingBobbers orig, Player player, bool canUse) {
+        private bool Player_ItemCheck_CheckFishingBobbers(On_Player.orig_ItemCheck_CheckFishingBobbers orig, Player player, bool canUse) {
             // 只有当执行收杆动作，且是玩家执行的时，才会关闭效果
             // 只有whoAmI=myPlayer才会执行这里，所以不需要判断
             bool flag = orig.Invoke(player, canUse); // 返回值若为false，则是拉杆
@@ -113,7 +110,7 @@ namespace Autofish
         }
 
         // 注意：收杆根本不会执行这个方法
-        private void Player_ItemCheck_Shoot(On.Terraria.Player.orig_ItemCheck_Shoot orig, Player player, int i, Item sItem, int weaponDamage) {
+        private void Player_ItemCheck_Shoot(On_Player.orig_ItemCheck_Shoot orig, Player player, int i, Item sItem, int weaponDamage) {
             // 只有当执行抛竿动作，且是玩家执行的时，才会开启效果
             if (player.whoAmI == Main.myPlayer && player.TryGetModPlayer(out AutofishPlayer modPlayer) && !modPlayer.ActivatedByMod && sItem.fishingPole > 0) {
                 modPlayer.Autocast = true;
