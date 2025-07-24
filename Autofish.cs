@@ -26,6 +26,9 @@ namespace Autofish
 
         [DefaultValue(true)]
         public bool AutoCatch;
+        
+        [DefaultValue(true)]
+        public bool AutoLockCast;
 
         [Range(0f, 1.5f)]
         [Increment(.1f)]

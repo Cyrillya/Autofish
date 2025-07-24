@@ -89,6 +89,11 @@ Mods: {
 						Щелкните правой кнопкой мыши по усилению, чтобы отменить его
 						'''
 				}
+
+				AutoLockCast: {
+					// Label: Auto Lock Cast
+					// Tooltip: ""
+				}
 			}
 		}
 

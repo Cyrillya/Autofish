@@ -89,6 +89,11 @@ Mods: {
 						Right click the buff to cancel it
 						'''
 				}
+
+				AutoLockCast: {
+					Label: Auto Lock Cast
+					Tooltip: ""
+				}
 			}
 		}
 

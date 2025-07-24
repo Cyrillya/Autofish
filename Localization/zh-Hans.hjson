@@ -1,8 +1,8 @@
 Mods: {
 	Autofish: {
 		Tips: {
-			TargetLock: 抛竿目标点已[c/22CC22:锁定]至当前鼠标位置
-			TargetUnlock: 抛竿目标点[c/BB2222:不再锁定]
+			TargetLock: 抛竿目标点自动锁定已[c/22CC22:启用]
+			TargetUnlock: 抛竿目标点自动锁定已[c/BB2222:禁用]
 			PotionsRanOut: 已用光{0}
 		}
 
@@ -89,9 +89,14 @@ Mods: {
 						右键取消Buff则会停止
 						'''
 				}
+
+				AutoLockCast: {
+					Label: 自动锁定抛竿目标点
+					Tooltip: "启用该选项后，将自动锁定抛竿目标点"
+				}
 			}
 		}
 
-		Keybinds.LockcastDirection.DisplayName: 将抛竿目标点锁定至鼠标位置
+		Keybinds.LockcastDirection.DisplayName: 自动将抛竿目标点锁定至鼠标位置
 	}
 }
