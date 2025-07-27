@@ -98,10 +98,5 @@ Mods: {
 				}
 			}
 		}
-
-		Keybinds: {
-			LockcastDirection.DisplayName: Lock Casting Target To Cursor
-			SwitchAutoFishing.DisplayName: Switch Auto Fishing
-		}
 	}
 }

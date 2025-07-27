@@ -5,22 +5,6 @@ using Terraria.ModLoader.Config;
 
 namespace Autofish
 {
-    public class Autofish : Mod
-    {
-        public static ModKeybind LockcastDirectionKeybind;
-        public static ModKeybind SwitchAutoFishingState;
-
-        public override void Load() {
-            LockcastDirectionKeybind = KeybindLoader.RegisterKeybind(this, "LockcastDirection", "Mouse2");
-            SwitchAutoFishingState = KeybindLoader.RegisterKeybind(this, "SwitchAutoFishing", "Mouse3");
-        }
-
-        public override void Unload() {
-            LockcastDirectionKeybind = null;
-            SwitchAutoFishingState = null;
-        }
-    }
-
     public class Configuration : ModConfig
     {
         public override ConfigScope Mode => ConfigScope.ClientSide;

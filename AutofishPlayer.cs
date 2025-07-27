@@ -21,16 +21,7 @@ namespace Autofish
         internal bool ActivatedByMod; // check if this item use is activated by Mod
         internal bool Autocast;
         internal int AutocastDelay;
-
-        public override bool HoverSlot(Item[] inventory, int context, int slot) {
-            Item item = inventory[slot];
-            foreach (GlobalItem itemGlobal in item.Globals) {
-                if (itemGlobal is ClickFishingItem clickFishingItem) {
-                    clickFishingItem.ClickItem();
-                }
-            }
-            return false;
-        }
+        
 
         public override void PreUpdate() {
             if (Player.whoAmI != Main.myPlayer)

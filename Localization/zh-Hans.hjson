@@ -98,10 +98,5 @@ Mods: {
 				}
 			}
 		}
-
-		Keybinds: {
-			LockcastDirection.DisplayName: 切换自动将抛竿目标点锁定至鼠标位置
-			SwitchAutoFishing.DisplayName: 切换自动钓鱼
-		}
 	}
 }

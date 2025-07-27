@@ -25,10 +25,4 @@ public class ClickFishingItem : GlobalItem
             ? "Mods.Autofish.Tips.Enable"
             : "Mods.Autofish.Tips.Disable");
     }
-
-    public void ClickItem() {
-        var configuration = AutofishPlayer.Configuration;
-        if (Autofish.SwitchAutoFishingState.JustPressed) configuration.AutoCatch = !configuration.AutoCatch;
-        if (Autofish.LockcastDirectionKeybind.JustPressed) configuration.AutoLockCast = !configuration.AutoLockCast;
-    }
 }
