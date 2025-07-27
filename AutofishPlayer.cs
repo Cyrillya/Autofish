@@ -22,16 +22,14 @@ namespace Autofish
         internal bool Autocast;
         internal int AutocastDelay;
 
-        public override void ProcessTriggers(TriggersSet triggersSet) {
-            if (Autofish.LockcastDirectionKeybind.JustPressed) {
-                Configuration.AutoLockCast = !Configuration.AutoLockCast;
-                if (Configuration.AutoLockCast) {
-                    // CastPosition = Main.MouseWorld.ToPoint();
-                    Main.NewText(Language.GetTextValue("Mods.Autofish.Tips.TargetLock"));
-                    return;
+        public override bool HoverSlot(Item[] inventory, int context, int slot) {
+            Item item = inventory[slot];
+            foreach (GlobalItem itemGlobal in item.Globals) {
+                if (itemGlobal is ClickFishingItem clickFishingItem) {
+                    clickFishingItem.ClickItem();
                 }
-                Main.NewText(Language.GetTextValue("Mods.Autofish.Tips.TargetUnlock"));
             }
+            return false;
         }
 
         public override void PreUpdate() {
