@@ -1,8 +1,10 @@
 Mods: {
 	Autofish: {
 		Tips: {
-			TargetLock: Casting target are now [c/22CC22:locked] to current cursor position.
-			TargetUnlock: Casting target are now [c/BB2222:unlocked].
+			AutoFishingState: Auto fishing state
+			TargetLockState: Casting target are now .
+			Enable: "[c/22CC22:Enable]"
+			Disable: "[c/BB2222:Disable]"
 			PotionsRanOut: Already ran out of {0}.
 		}
 
@@ -89,9 +91,12 @@ Mods: {
 						Right click the buff to cancel it
 						'''
 				}
+
+				AutoLockCast: {
+					Label: Auto Lock Cast
+					Tooltip: ""
+				}
 			}
 		}
-
-		Keybinds.LockcastDirection.DisplayName: Lock Casting Target To Cursor
 	}
 }

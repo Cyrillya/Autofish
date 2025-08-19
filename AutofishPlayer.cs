@@ -16,24 +16,12 @@ namespace Autofish
     public class AutofishPlayer : ModPlayer
     {
         internal static Configuration Configuration;
-        internal bool Lockcast;
         internal Point CastPosition;
         internal int PullTimer;
         internal bool ActivatedByMod; // check if this item use is activated by Mod
         internal bool Autocast;
         internal int AutocastDelay;
-
-        public override void ProcessTriggers(TriggersSet triggersSet) {
-            if (Autofish.LockcastDirectionKeybind.JustPressed) {
-                Lockcast = !Lockcast;
-                if (Lockcast) {
-                    CastPosition = Main.MouseWorld.ToPoint();
-                    Main.NewText(Language.GetTextValue("Mods.Autofish.Tips.TargetLock"));
-                    return;
-                }
-                Main.NewText(Language.GetTextValue("Mods.Autofish.Tips.TargetUnlock"));
-            }
-        }
+        
 
         public override void PreUpdate() {
             if (Player.whoAmI != Main.myPlayer)
@@ -61,7 +49,7 @@ namespace Autofish
                 }
 
                 var mouseX = Main.mouseX; var mouseY = Main.mouseY;
-                if (Lockcast) {
+                if (CastPosition != default && Configuration.AutoLockCast) {
                     Main.mouseX = CastPosition.X - (int)Main.screenPosition.X;
                     Main.mouseY = CastPosition.Y - (int)Main.screenPosition.Y;
                 }
@@ -72,7 +60,7 @@ namespace Autofish
                 Player.ItemCheck();
                 AutocastDelay = 10;
 
-                if (Lockcast) { Main.mouseX = mouseX; Main.mouseY = mouseY; }
+                if (CastPosition != default && Configuration.AutoLockCast) { Main.mouseX = mouseX; Main.mouseY = mouseY; }
             }
         }
 
@@ -84,7 +72,6 @@ namespace Autofish
         }
 
         public override void OnEnterWorld() {
-            Lockcast = false;
             CastPosition = default;
             Autocast = false;
         }
@@ -114,6 +101,9 @@ namespace Autofish
             // 只有当执行抛竿动作，且是玩家执行的时，才会开启效果
             if (player.whoAmI == Main.myPlayer && player.TryGetModPlayer(out AutofishPlayer modPlayer) && !modPlayer.ActivatedByMod && sItem.fishingPole > 0) {
                 modPlayer.Autocast = true;
+                if (Configuration.AutoLockCast) {
+                    modPlayer.CastPosition = Main.MouseWorld.ToPoint();
+                }
             }
             orig.Invoke(player, i, sItem, weaponDamage);
         }

@@ -5,19 +5,6 @@ using Terraria.ModLoader.Config;
 
 namespace Autofish
 {
-    public class Autofish : Mod
-    {
-        public static ModKeybind LockcastDirectionKeybind;
-
-        public override void Load() {
-            LockcastDirectionKeybind = KeybindLoader.RegisterKeybind(this, "LockcastDirection", "L");
-        }
-
-        public override void Unload() {
-            LockcastDirectionKeybind = null;
-        }
-    }
-
     public class Configuration : ModConfig
     {
         public override ConfigScope Mode => ConfigScope.ClientSide;
@@ -26,6 +13,9 @@ namespace Autofish
 
         [DefaultValue(true)]
         public bool AutoCatch;
+        
+        [DefaultValue(true)]
+        public bool AutoLockCast;
 
         [Range(0f, 1.5f)]
         [Increment(.1f)]

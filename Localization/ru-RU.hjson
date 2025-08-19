@@ -1,8 +1,10 @@
 Mods: {
 	Autofish: {
 		Tips: {
-			TargetLock: Точка метания [c/22CC22:заблокированно] к текущей позиции курсора.
-			TargetUnlock: Точка метания [c/BB2222:разблокировано].
+			// AutoFishingState: AutoFishingState
+			// TargetLockState: Casting target are now .
+			// Enable: "[c/22CC22:Enable]"
+			// Disable: "[c/BB2222:Disable]"
 			PotionsRanOut: Закончились {0}.
 		}
 
@@ -89,9 +91,17 @@ Mods: {
 						Щелкните правой кнопкой мыши по усилению, чтобы отменить его
 						'''
 				}
+
+				AutoLockCast: {
+					// Label: Auto Lock Cast
+					// Tooltip: ""
+				}
 			}
 		}
 
-		Keybinds.LockcastDirection.DisplayName: Зафиксировать поплавок на курсоре
+		Keybinds: {
+			LockcastDirection.DisplayName: Зафиксировать поплавок на курсоре
+			// SwitchAutoFishing.DisplayName: Switch Auto Fishing
+		}
 	}
 }
