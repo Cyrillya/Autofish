@@ -1,10 +1,10 @@
 Mods: {
 	Autofish: {
 		Tips: {
-			AutoFishingState: Auto fishing state
-			TargetLockState: Casting target are now .
-			Enable: "[c/22CC22:Enable]"
-			Disable: "[c/BB2222:Disable]"
+			AutoFishingState: Auto fishing is {0}.
+			TargetLockState: Casting target auto-lock is {0}.
+			Enable: "[c/22CC22:enabled]"
+			Disable: "[c/BB2222:disabled]"
 			PotionsRanOut: Already ran out of {0}.
 		}
 
@@ -93,8 +93,8 @@ Mods: {
 				}
 
 				AutoLockCast: {
-					Label: Auto Lock Cast
-					Tooltip: ""
+					Label: Casting Target Auto-lock
+					Tooltip: "If enabled, casting target point will be automatically locked to cursor position when you start fishing"
 				}
 			}
 		}

@@ -1,8 +1,8 @@
 Mods: {
 	Autofish: {
 		Tips: {
-			AutoFishingState: 自动钓鱼已
-			TargetLockState: 抛竿目标点自动锁定已
+			AutoFishingState: 自动钓鱼已{0}
+			TargetLockState: 抛竿目标点自动锁定已{0}
 			Enable: "[c/22CC22:启用]"
 			Disable: "[c/BB2222:禁用]"
 			PotionsRanOut: 已用光{0}

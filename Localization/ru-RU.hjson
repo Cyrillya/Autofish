@@ -1,10 +1,10 @@
 Mods: {
 	Autofish: {
 		Tips: {
-			// AutoFishingState: AutoFishingState
-			// TargetLockState: Casting target are now .
-			// Enable: "[c/22CC22:Enable]"
-			// Disable: "[c/BB2222:Disable]"
+			// AutoFishingState: Auto fishing is now {0}.
+			// TargetLockState: Casting target auto-lock is now {0}.
+			// Enable: "[c/22CC22:enabled]"
+			// Disable: "[c/BB2222:disabled]"
 			PotionsRanOut: Закончились {0}.
 		}
 
@@ -97,11 +97,6 @@ Mods: {
 					// Tooltip: ""
 				}
 			}
-		}
-
-		Keybinds: {
-			LockcastDirection.DisplayName: Зафиксировать поплавок на курсоре
-			// SwitchAutoFishing.DisplayName: Switch Auto Fishing
 		}
 	}
 }

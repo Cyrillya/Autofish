@@ -11,10 +11,8 @@ public class ClickFishingItem : GlobalItem
     public override void ModifyTooltips(Item item, List<TooltipLine> tooltips) {
         if (item.fishingPole > 0) {
             var configuration = AutofishPlayer.Configuration;
-            var autoState = Language.GetTextValue("Mods.Autofish.Tips.AutoFishingState");
-            var lockState = Language.GetTextValue("Mods.Autofish.Tips.TargetLockState");
-            autoState += GetSwitchState(configuration.AutoCatch);
-            lockState += GetSwitchState(configuration.AutoLockCast);
+            var autoState = Language.GetTextValue("Mods.Autofish.Tips.AutoFishingState", GetSwitchState(configuration.AutoCatch));
+            var lockState = Language.GetTextValue("Mods.Autofish.Tips.TargetLockState", GetSwitchState(configuration.AutoLockCast));
             tooltips.Add(new TooltipLine(Mod, "State", autoState) { OverrideColor = Color.Pink });
             tooltips.Add(new TooltipLine(Mod, "LockState", lockState) { OverrideColor = Color.Pink });
         }
