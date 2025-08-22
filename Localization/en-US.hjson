@@ -94,7 +94,7 @@ Mods: {
 
 				AutoLockCast: {
 					Label: Casting Target Auto-lock
-					Tooltip: "If enabled, casting target point will be automatically locked to cursor position when you start fishing"
+					Tooltip: If enabled, casting target point will be automatically locked to cursor position when you start fishing
 				}
 			}
 		}
