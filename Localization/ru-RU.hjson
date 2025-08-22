@@ -1,18 +1,18 @@
 Mods: {
 	Autofish: {
 		Tips: {
-			// AutoFishingState: Auto fishing is now {0}.
-			// TargetLockState: Casting target auto-lock is now {0}.
-			// Enable: "[c/22CC22:enabled]"
-			// Disable: "[c/BB2222:disabled]"
+			// AutoFishingState: Автоматическая рыбалка {0}.
+			// TargetLockState: Автоблокировка поплавка {0}.
+			// Enable: "[c/22CC22:включено]"
+			// Disable: "[c/BB2222:выключено]"
 			PotionsRanOut: Закончились {0}.
 		}
 
 		Configs: {
 			Configuration: {
 				AutoCatch: {
-					Label: Автоматическое вытягивание
-					Tooltip: Леска будет автоматически вытянута, работает вместе с фильтрами
+					Label: Автоматическая рыбалка
+					Tooltip: Леска будет автоматически вытянута и закинута, работает вместе с фильтрами
 				}
 
 				PullingDelay: {
@@ -93,8 +93,8 @@ Mods: {
 				}
 
 				AutoLockCast: {
-					// Label: Auto Lock Cast
-					// Tooltip: ""
+					// Label: Автоблокировка поплавка
+					// Tooltip: Если включено, точка заброса поплавка будет автоматически зафиксирована на позиции курсора при начале рыбалки
 				}
 			}
 		}
